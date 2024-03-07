@@ -1,3 +1,7 @@
+const mainCont = document.getElementById("main")
+const btnDivCont = document.getElementById("btnDiv");
+
+
 function openTab(url) {
     chrome.tabs.create({
         url: url
@@ -42,10 +46,12 @@ document.addEventListener("click", function (e) {
 
     if (screenshottarget) {
         openTab("https://imagetotext-lper.onrender.com/")
+        // openTab("http://127.0.0.1:3000/")
     }
 
     else if (logintarget) {
         openTab("https://imagetotext-lper.onrender.com/login")
+        // openTab("http://127.0.0.1:3000/login")
     }
 
 

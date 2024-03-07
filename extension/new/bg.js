@@ -9,6 +9,9 @@ chrome.runtime.onInstalled.addListener(async function (details) {
 
 async function cookieChecker(cb) {
     let res = await chrome.cookies.getAll({ url: "https://imagetotext-lper.onrender.com/" })
+    // let res = await chrome.cookies.getAll({ url: "http://127.0.0.1:3000/" })
+
+    console.log("cookies", res);
 
     if (res.length == 0) {
 
