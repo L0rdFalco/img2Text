@@ -1,0 +1,137 @@
+{
+    "name": "img to text",
+    "description": "extract text from any image instantly",
+    "version": "0.0.0.1",
+    "manifest_version": 3,
+    "icons": {
+        "16": "./res/icon16.png",
+        "24": "./res/icon24.png",
+        "32": "./res/icon32.png",
+        "48": "./res/icon48.png",
+        "64": "./res/icon64.png",
+        "128": "./res/icon128.png",
+        "256": "./res/icon256.png",
+        "512": "./res/icon512.png"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://*/*",
+                "http://127.0.0.1/*",
+                "http://localhost/*"
+            ],
+            "exclude_matches": [
+                "*://app-backend-gkbi.onrender.com/*",
+                "*://www.paypal-mobilemoney.com/*",
+                "*://paypal.com/*",
+                "*://paypal-communication.com/*",
+                "*://paypal-community.com/*",
+                "*://paypal-corp.com/*",
+                "*://paypal-mktg.com/*",
+                "*://paypal-prepaid.com/*",
+                "*://paypal-promotions.com/*",
+                "*://paypal.at/*",
+                "*://paypal.be/*",
+                "*://paypal.ca/*",
+                "*://paypal.ch/*",
+                "*://paypal.cl/*",
+                "*://paypal.co/*",
+                "*://paypal.co.id/*",
+                "*://paypal.co.il/*",
+                "*://paypal.co.in/*",
+                "*://paypal.co.nz/*",
+                "*://paypal.co.th/*",
+                "*://paypal.co.uk/*",
+                "*://paypal.co.za/*",
+                "*://paypal.com.ar/*",
+                "*://paypal.com.au/*",
+                "*://paypal.com.br/*",
+                "*://paypal.com.hk/*",
+                "*://paypal.com.mx/*",
+                "*://paypal.com.my/*",
+                "*://paypal.com.pe/*",
+                "*://paypal.com.pt/*",
+                "*://paypal.com.sa/*",
+                "*://paypal.com.sg/*",
+                "*://paypal.com.tr/*",
+                "*://paypal.com.tw/*",
+                "*://paypal.com.ve/*",
+                "*://paypal.de/*",
+                "*://paypal.dk/*",
+                "*://paypal.es/*",
+                "*://paypal.eu/*",
+                "*://paypal.fi/*",
+                "*://paypal.fr/*",
+                "*://paypal.ie/*",
+                "*://paypal.in/*",
+                "*://paypal.it/*",
+                "*://paypal.jp/*",
+                "*://paypal.lu/*",
+                "*://paypal.me/*",
+                "*://paypal.nl/*",
+                "*://paypal.no/*",
+                "*://paypal.ph/*",
+                "*://paypal.pl/*",
+                "*://paypal.pt/*",
+                "*://paypal.se/*",
+                "*://paypal.vn/*",
+                "*://paypalc3.com/*",
+                "*://paypalc3.net/*",
+                "*://paypalcorp.com/*",
+                "*://paypalobjects.com/*",
+                "*://pypl.com/*"
+            ],
+            "css": [
+                "/content/content-style.css"
+            ],
+            "js": [
+                "/content/content-script.js"
+            ],
+            "run_at": "document_end"
+        },
+        {
+            "matches": [
+                "https://app-backend-gkbi.onrender.com/*",
+                "http://127.0.0.1/*",
+                "http://localhost/*"
+            ],
+            "js": [
+                "/content/auth-cs.js"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    "action": {
+        "default_icons": {
+            "16": "./res/icon16.png",
+            "24": "./res/icon24.png",
+            "32": "./res/icon32.png",
+            "48": "./res/icon48.png",
+            "64": "./res/icon64.png",
+            "128": "./res/icon128.png",
+            "256": "./res/icon256.png",
+            "512": "./res/icon512.png"
+        },
+        "default_title": "templ",
+        "default_popup": "./popup/popup.html"
+    },
+    "options_page": "./options/options.html",
+    "background": {
+        "service_worker": "bg.js"
+    },
+    "externally_connectable": {
+        "matches": [
+            "http://127.0.0.1/*",
+            "http://localhost/*"
+        ]
+    },
+    "permissions": [
+        "tabs",
+        "scripting",
+        "activeTab",
+        "storage"
+    ],
+    "host_permissions": [
+        "*://*/*"
+    ]
+}
