@@ -13,36 +13,6 @@
         "256": "./res/icon256.png",
         "512": "./res/icon512.png"
     },
-    "content_scripts": [
-        {
-            "matches": [
-                "https://*/*",
-                "http://127.0.0.1/*",
-                "http://localhost/*"
-            ],
-            "exclude_matches": [
-                "*://app-backend-gkbi.onrender.com/*"
-            ],
-            "css": [
-                "/content/content-style.css"
-            ],
-            "js": [
-                "/content/content-script.js"
-            ],
-            "run_at": "document_end"
-        },
-        {
-            "matches": [
-                "https://app-backend-gkbi.onrender.com/*",
-                "http://127.0.0.1/*",
-                "http://localhost/*"
-            ],
-            "js": [
-                "/content/auth-cs.js"
-            ],
-            "run_at": "document_end"
-        }
-    ],
     "action": {
         "default_icons": {
             "16": "./res/icon16.png",
@@ -54,26 +24,16 @@
             "256": "./res/icon256.png",
             "512": "./res/icon512.png"
         },
-        "default_title": "templ",
+        "default_title": "img2text",
         "default_popup": "./popup/popup.html"
     },
     "options_page": "./options/options.html",
     "background": {
         "service_worker": "bg.js"
     },
-    "externally_connectable": {
-        "matches": [
-            "http://127.0.0.1/*",
-            "http://localhost/*"
-        ]
-    },
     "permissions": [
         "tabs",
-        "scripting",
         "activeTab",
-        "storage"
-    ],
-    "host_permissions": [
-        "*://*/*"
+        "cookes"
     ]
 }

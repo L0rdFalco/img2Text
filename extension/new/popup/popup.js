@@ -41,11 +41,11 @@ document.addEventListener("click", function (e) {
 
 
     if (screenshottarget) {
-        openTab("https://imagetotext.onrender.com/")
+        openTab("https://imagetotext-lper.onrender.com/")
     }
 
     else if (logintarget) {
-        openTab("https://imagetotext.onrender.com/login")
+        openTab("https://imagetotext-lper.onrender.com/login")
     }
 
 
