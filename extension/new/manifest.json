@@ -1,7 +1,7 @@
 {
     "name": "img to text",
     "description": "extract text from any image instantly",
-    "version": "0.0.0.1",
+    "version": "0.0.1.1",
     "manifest_version": 3,
     "icons": {
         "16": "./res/icon16.png",
@@ -32,12 +32,9 @@
         "service_worker": "bg.js"
     },
     "permissions": [
-        "tabs",
-        "activeTab",
         "cookies"
     ],
     "host_permissions": [
-        "http://127.0.0.1:3000/*",
-        "https://imagetotext-lper.onrender.com/*"
+        "<all_urls>"
     ]
 }

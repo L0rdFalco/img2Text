@@ -1,0 +1,42 @@
+{
+   "action": {
+      "default_icon": {
+         "128": "images/icon-128.png",
+         "16": "images/icon-16.png",
+         "32": "images/icon-32.png",
+         "48": "images/icon-48.png"
+      },
+      "default_title": "Crop It!"
+   },
+   "background": {
+      "service_worker": "background.js"
+   },
+   "commands": {
+      "_execute_action": {
+         "suggested_key": {
+            "chromeos": "Ctrl+Period",
+            "linux": "Ctrl+Period",
+            "mac": "Command+Period",
+            "windows": "Ctrl+Period"
+         }
+      }
+   },
+   "content_scripts": [ {
+      "js": [ "content-script.js", "wcl.js" ],
+      "matches": [ "*://*/*" ]
+   } ],
+   "description": "Crop It! Provide users crop current web page's screenshot feature. Users could use it to capture images they need.",
+   "icons": {
+      "128": "images/icon-128.png",
+      "16": "images/icon-16.png",
+      "32": "images/icon-32.png",
+      "48": "images/icon-48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqtN2JySXemv1fovhrPvqm1qG6JYUTqam207uwqxBR5oJaWI0LqT3/QhLKKSQXilnWwcGGRBKFxRgF/yDxCdGQTeZm3odKipDA0TNLQNylY1eigOztQzt2kf0VTb4gbo/6meah5cBJdU5bGVEGW5gO0uArusSknARzUYjnbFGWK+Xs/zWUdsLQ9/nCdqbWzMTUbaPsouAtXOtkApC++Zb7yJ13lZ88sMP/iCSRWdQZJFR6sjh7mS+vDPRrBcueZYc9qIh358PeFC0llq7ShPBMJZWhhyRtHJhris5feQyrF9/vJXOrYohD+AeE8O/n/e3/TwYEoDJOQuYbUHUpa3i/wIDAQAB",
+   "manifest_version": 3,
+   "name": "Crop It!",
+   "options_page": "options.html",
+   "permissions": [ "contextMenus", "activeTab", "downloads", "storage" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.0.8"
+}

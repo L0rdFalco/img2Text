@@ -1,3 +1,4 @@
+let accountState = false
 
 chrome.runtime.onInstalled.addListener(async function (details) {
 
@@ -8,10 +9,10 @@ chrome.runtime.onInstalled.addListener(async function (details) {
 })
 
 async function cookieChecker(cb) {
-    let res = await chrome.cookies.getAll({ url: "https://imagetotext-lper.onrender.com/" })
-    // let res = await chrome.cookies.getAll({ url: "http://127.0.0.1:3000/" })
+    // let res = await chrome.cookies.getAll({ url: "https://imagetotext-lper.onrender.com/" })
+    let res = await chrome.cookies.getAll({ url: "http://127.0.0.1:3000/" })
 
-    console.log("cookies", res);
+    console.log("cookies arr: ", res);
 
     if (res.length == 0) {
 
@@ -36,6 +37,18 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
         cookieChecker(sendResponse)
 
+    }
+
+    else if (request.message === "from-popup-account-status") {
+        //hit the api here to find out account status
+
+        if (accountState) {
+            sendResponse({ status: true })
+        }
+        else {
+            sendResponse({ status: false })
+
+        }
     }
 
     else {
@@ -71,3 +84,4 @@ function openTab() {
         url: "popup/popup.html"
     })
 }
+
