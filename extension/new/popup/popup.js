@@ -146,6 +146,10 @@ document.addEventListener("click", function (e) {
                 //paying user
                 //take selected ss and open in new tab
 
+                chrome.runtime.sendMessage({ message: "from-popup-cus" }, (res) => {
+                    console.log(res);
+                })
+
             }
             else {
                 //free user

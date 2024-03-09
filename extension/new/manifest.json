@@ -28,13 +28,25 @@
         "default_popup": "./popup/popup.html"
     },
     "options_page": "./options/options.html",
+    "content_scripts": [
+        {
+            "js": [
+                "/content/content-script.js",
+                "/content/win-cs.js"
+            ],
+            "matches": [
+                "*://*/*"
+            ]
+        }
+    ],
     "background": {
         "service_worker": "bg.js"
     },
     "permissions": [
         "cookies",
-        "tabs",
-        "activeTab"
+        "activeTab",
+        "storage",
+        "contextMenus"
     ],
     "host_permissions": [
         "<all_urls>"
