@@ -32,7 +32,9 @@
         "service_worker": "bg.js"
     },
     "permissions": [
-        "cookies"
+        "cookies",
+        "tabs",
+        "activeTab"
     ],
     "host_permissions": [
         "<all_urls>"
