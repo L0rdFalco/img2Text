@@ -42,14 +42,6 @@ chrome.runtime.onInstalled.addListener(async function (details) {
 
 })
 
-//when the context menu item is clicked, it activates the rectangle thing
-chrome.contextMenus.onClicked.addListener((info, tab) => {
-
-})
-
-
-
-
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log("cs request: ", request);
 
