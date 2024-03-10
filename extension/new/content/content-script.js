@@ -175,7 +175,7 @@ template.innerHTML = `
   .selection::before{position:absolute;left:var(--pseudo-position);top:0;content:'';width:var(--pseudo-length);height:100%;box-sizing:border-box;border-left:1px solid var(--selection-color);border-right:1px solid var(--selection-color);pointer-events:none;opacity:.4;box-shadow:inset 1px 0 0 var(--serif-color),inset -1px 0 0 var(--serif-color);}
   .selection::after{position:absolute;top:var(--pseudo-position);left:0;content:'';width:100%;height:var(--pseudo-length);box-sizing:border-box;border-top:1px solid var(--selection-color);border-bottom:1px solid var(--selection-color);pointer-events:none;opacity:.4;box-shadow:inset 0 1px 0 var(--serif-color),inset 0 -1px 0 var(--serif-color);}
   .selection__em{position:absolute;left:var(--decorate-coordinate);top:var(--decorate-coordinate);width:100%;height:100%;display:block;border:var(--decorate-width) solid var(--selection-color);clip-path:var(--selection-mask);}
-  .selection__span{position:absolute;bottom:0;right:0;font-size:.75em;line-height:2.33;color:var(--selection-color);text-shadow:1px 1px 0 var(--serif-color);transform:translateY(100%);}
+  .selection__span{position:absolute;bottom:0;right:0;font-size:.99em;line-height:2.33;color:var(--selection-color);text-shadow:1px 1px 0 var(--serif-color);transform:translateY(100%);}
   .selection--dragging{user-select:none;}
   [data-action="dragging"]{user-select:none;}
   
@@ -489,7 +489,7 @@ const init = {
     refresh: function ({ x, y, width, height } = this._data) {
         const { styleSheet, info } = this._nodes;
 
-        info.textContent = `${Math.floor(width)} x ${Math.floor(height)}`;
+        info.textContent = `After selecting area, hit Enter to start processing image. Dimensions: ${Math.floor(width)} x ${Math.floor(height)}`;
         // const coordinate = [
         //   '0% 0%',
         //   '0% 100%',

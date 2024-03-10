@@ -17,7 +17,7 @@ if (typeof navigator.whenDefined !== 'function') {
   Object.defineProperty(navigator, 'whenDefined', {
     configurable: false,
     enumerable: true,
-    value: function() {
+    value: function () {
       let units;
 
       units = Array.from(arguments);
@@ -29,7 +29,7 @@ if (typeof navigator.whenDefined !== 'function') {
           return new Promise((resolve, reject) => {
             let c, iid;
             const max = 10000;
-            
+
             c = 0;
             iid = setInterval(() => {
               let _root, parts;
@@ -449,14 +449,14 @@ const init = {
   _nodes: {},
   _evtList: [],
 
-  getSelectionInfo: function() {
+  getSelectionInfo: function () {
     const { selection } = this._nodes;
     const { x, y, width, height } = selection.getBoundingClientRect();
-    const { x:scrollX, y:scrollY } = _wcl.getScroll();
+    const { x: scrollX, y: scrollY } = _wcl.getScroll();
 
     return { x, y, width, height, scrollX, scrollY };
   },
-  updateSelectionInfo: function() {
+  updateSelectionInfo: function () {
     const { selection } = this._nodes;
     const { x, y, width, height } = selection.getBoundingClientRect();
 
@@ -468,7 +468,7 @@ const init = {
       height
     };
   },
-  _environmentSetting: function({ sensorSize = defaults.sensorSize, selectionColor = defaults.selectionColor, overlayBgc = defaults.overlayBgc, overlayOpacity = defaults.overlayOpacity }) {
+  _environmentSetting: function ({ sensorSize = defaults.sensorSize, selectionColor = defaults.selectionColor, overlayBgc = defaults.overlayBgc, overlayOpacity = defaults.overlayOpacity }) {
     const { styleSheet } = this._nodes;
 
     // selection
@@ -486,10 +486,10 @@ const init = {
       '--overlay-opacity': overlayOpacity,
     }, styleSheet);
   },
-  refresh: function({ x, y, width, height } = this._data) {
+  refresh: function ({ x, y, width, height } = this._data) {
     const { styleSheet, info } = this._nodes;
-    
-    info.textContent = `${Math.floor(width)} x ${Math.floor(height)}`;
+
+    info.textContent = `After selecting area, hit Enter to start processing image ${Math.floor(width)} x ${Math.floor(height)}`;
     // const coordinate = [
     //   '0% 0%',
     //   '0% 100%',
@@ -513,7 +513,7 @@ const init = {
       // '--overlay-mask': `polygon(${coordinate.join()})`
     }, styleSheet);
   },
-  detectAction: function({ pX, pY }) {
+  detectAction: function ({ pX, pY }) {
     const { x, y, width, height, sensorSize } = this._data;
     let action = 'move';
 
@@ -530,14 +530,14 @@ const init = {
 
     return action;
   },
-  _onDown: function(evt) {
+  _onDown: function (evt) {
     this._data.controllerDD = new AbortController();
 
     const signal = this._data.controllerDD.signal;
     const { move, up } = this._data.pursuer;
     const html = document.querySelector('html');
     const { selection, btnCloseShortcuts } = this._nodes;
-    const { x:pX, y:pY } = _wcl.pointer(evt);
+    const { x: pX, y: pY } = _wcl.pointer(evt);
 
     if ((typeof evt.buttons !== 'undefined' && evt.buttons !== 1) || selection.dataset.action) {
       return;
@@ -558,15 +558,15 @@ const init = {
     btnCloseShortcuts.click();
 
     this._data.dX = pX - _wcl.scrollX - this._data.x;
-    this._data.dY = pY - _wcl.scrollY - this._data.y ;
-    this._data.action = this.detectAction({ pX:pX - _wcl.scrollX, pY:pY - _wcl.scrollY });
+    this._data.dY = pY - _wcl.scrollY - this._data.y;
+    this._data.action = this.detectAction({ pX: pX - _wcl.scrollX, pY: pY - _wcl.scrollY });
   },
 
-  _onMove: function(evt) {
+  _onMove: function (evt) {
     const { selection } = this._nodes;
     const { x, y, dX, dY, width, height, action, selectionMinSize } = this._data;
-    const { x:pX, y:pY } = _wcl.pointer(evt);
-    const { width:vW, height:vH } = _wcl.getViewportSize();
+    const { x: pX, y: pY } = _wcl.pointer(evt);
+    const { width: vW, height: vH } = _wcl.getViewportSize();
     let { aspectRatio } = this._data;
 
     if ((typeof evt.buttons !== 'undefined' && evt.buttons !== 1) || !selection.dataset.action) {
@@ -605,7 +605,7 @@ const init = {
           sY = vH - height;
         }
 
-        this.refresh({ x:sX, y:sY, width, height });
+        this.refresh({ x: sX, y: sY, width, height });
         break;
       }
 
@@ -639,7 +639,7 @@ const init = {
           } else if (sX + sW > vW) {
             sW = vW - sX;
           }
-          
+
           sH = sW * aspectRatio;
           if (sH < selectionMinSize) {
             sH = selectionMinSize;
@@ -667,7 +667,7 @@ const init = {
           }
         }
 
-        this.refresh({ x:sX, y:sY, width:sW, height:sH });
+        this.refresh({ x: sX, y: sY, width: sW, height: sH });
         break;
       }
 
@@ -686,7 +686,7 @@ const init = {
           } else if (sX + sW > vW) {
             sW = vW - sX;
           }
-          
+
           if (sH < selectionMinSize) {
             sH = selectionMinSize;
           } else if (lY - sH < 0) {
@@ -730,7 +730,7 @@ const init = {
 
         const sY = lY - sH;
 
-        this.refresh({ x:sX, y:sY, width:sW, height:sH });
+        this.refresh({ x: sX, y: sY, width: sW, height: sH });
         break;
       }
 
@@ -793,7 +793,7 @@ const init = {
         const sX = lX - sW;
         const sY = lY - sH;
 
-        this.refresh({ x:sX, y:sY, width:sW, height:sH });
+        this.refresh({ x: sX, y: sY, width: sW, height: sH });
         break;
       }
 
@@ -856,13 +856,13 @@ const init = {
 
         const sX = lX - sW;
 
-        this.refresh({ x:sX, y:sY, width:sW, height:sH });
+        this.refresh({ x: sX, y: sY, width: sW, height: sH });
         break;
       }
     }
   },
 
-  _onUp: function(evt) {
+  _onUp: function (evt) {
     const { selection } = this._nodes;
 
     if ((typeof evt.buttons !== 'undefined' && (evt.buttons & 1)) || !selection.dataset.action) {
@@ -872,8 +872,8 @@ const init = {
     this._data.controllerDD.abort();
     delete selection.dataset.action;
   },
-  
-  _onKeyDown: function(evt) {
+
+  _onKeyDown: function (evt) {
     const { key, metaKey, ctrlKey, shiftKey } = evt;
     const { wrap, shortcuts, btnCloseShortcuts, selection } = this._nodes;
 
@@ -888,9 +888,9 @@ const init = {
       case 'ArrowRight': {
         evt.preventDefault();
         this.updateSelectionInfo();
-        
+
         const { x, y, width, height } = this._data;
-        const { width:vW, height:vH } = _wcl.getViewportSize();
+        const { width: vW, height: vH } = _wcl.getViewportSize();
 
         const deltaX = (key === 'ArrowLeft') ? -1 : (key === 'ArrowRight') ? 1 : 0;
         let sX = x + deltaX;
@@ -908,7 +908,7 @@ const init = {
           sY = vH - height;
         }
 
-        this.refresh({ x:sX, y:sY, width, height });
+        this.refresh({ x: sX, y: sY, width, height });
         break;
       }
       case 'Escape':
@@ -920,18 +920,18 @@ const init = {
         break;
       case 'Enter':
         if (!/(input)|(textarea)/i.test(evt.target?.tagName)) {
-          this._capture({ afterAct:'download'});
+          this._capture({ afterAct: 'download' });
         }
       case 'c':
         if (metaKey || ctrlKey) {
           // ctrl + c or cmd + c to copy image to clipboard
-          this._capture({ afterAct:'clipboard'});
+          this._capture({ afterAct: 'clipboard' });
         }
         break;
       case 'f': {
-        const { width:vW, height:vH } = _wcl.getViewportSize();
+        const { width: vW, height: vH } = _wcl.getViewportSize();
         const { isFullScreen, previous } = this._data;
-        
+
         if (selection.dataset.action === 'dragging') {
           return;
         }
@@ -943,9 +943,9 @@ const init = {
           this._data.isFullScreen = false;
         } else {
           const { x, y, width, height } = this.getSelectionInfo();
-          
-          this._data.previous =  { x, y, width, height };
-          this.refresh({ x:0, y:0, width:vW, height:vH });
+
+          this._data.previous = { x, y, width, height };
+          this.refresh({ x: 0, y: 0, width: vW, height: vH });
 
           this._data.isFullScreen = true;
         }
@@ -958,10 +958,10 @@ const init = {
         break;
     }
   },
-  _draw: function({ selectionInfo, image, afterAct = 'download' }) {
+  _draw: function ({ selectionInfo, image, afterAct = 'download' }) {
     const { canvas, sign } = this._nodes;
     const { x, y, width, height } = selectionInfo;
-    const { width:vW, height:vH } = _wcl.getViewportSize();
+    const { width: vW, height: vH } = _wcl.getViewportSize();
     const ctx = canvas.getContext('2d');
 
     let captured = new Image();
@@ -972,8 +972,8 @@ const init = {
       captured = null;
     };
     captured.addEventListener('load',
-      async function() {
-        const { width:sW, height:sH } = this;
+      async function () {
+        const { width: sW, height: sH } = this;
         const rW = sW / vW;
         const rH = sH / vH;
         const nX = x * rW;
@@ -1008,7 +1008,7 @@ const init = {
           }
         } else {
           // download
-          chrome.runtime.sendMessage({ action:'download', dataUrl });
+          chrome.runtime.sendMessage({ action: 'download', dataUrl });
         }
 
         destroy();
@@ -1019,15 +1019,15 @@ const init = {
     };
     captured.src = image;
   },
-  _capture: function({ afterAct = 'download' }) {
+  _capture: function ({ afterAct = 'download' }) {
     const selectionInfo = this.getSelectionInfo();
-    
+
     this._curtainCall();
-    
+
     // need to wait until selection style remove
     setTimeout(
       () => {
-        chrome.runtime.sendMessage({ action:'capture' },
+        chrome.runtime.sendMessage({ action: 'capture' },
           ({ image }) => {
             if (chrome.runtime.lastError) {
               console.log('Error: ' + chrome.runtime.lastError.message);
@@ -1037,7 +1037,7 @@ const init = {
           }
         );
       }
-    , 100);
+      , 100);
   },
   _onMessage: function (request, sender, sendResponse) {
     const { action } = request;
@@ -1054,7 +1054,7 @@ const init = {
         break;
     }
   },
-  _onAnimationend: function(evt) {
+  _onAnimationend: function (evt) {
     const { sign } = this._nodes;
     const { animationName } = evt;
 
@@ -1062,23 +1062,23 @@ const init = {
       sign.classList.remove('act');
     }
   },
-  _onResize: function(evt) {
+  _onResize: function (evt) {
     const { picker } = this._nodes;
 
     picker.blur();
     this._data.isFullScreen = false;
     this.refresh(this.rePosition());
   },
-  _curtainCall: function() {
+  _curtainCall: function () {
     const { btnCloseShortcuts } = this._nodes;
 
     // remove event
     document.removeEventListener('keydown', this._onKeyDown, true);
 
     btnCloseShortcuts.click();
-    document.body.classList.remove('ext-crop-it-active');     
+    document.body.classList.remove('ext-crop-it-active');
   },
-  _onCloseShortcuts: function(evt) {
+  _onCloseShortcuts: function (evt) {
     const { target } = evt;
     const { shortcuts } = this._nodes;
 
@@ -1086,18 +1086,18 @@ const init = {
     target.blur();
     shortcuts.classList.remove('active');
   },
-  _onTransitionend: function(evt) {
+  _onTransitionend: function (evt) {
     const { wrap } = this._nodes;
 
     if (wrap.classList.contains('transform')) {
       wrap.classList.remove('transform');
     }
   },
-  _onContextmenu: function(evt) {
+  _onContextmenu: function (evt) {
     const { picker, styleSheet } = this._nodes;
-    const { picker:{ width, height } } = this._data;
-    const { x:pX, y:pY } = _wcl.pointer(evt);
-    const { width:vW, height:vH } = _wcl.getViewportSize();
+    const { picker: { width, height } } = this._data;
+    const { x: pX, y: pY } = _wcl.pointer(evt);
+    const { width: vW, height: vH } = _wcl.getViewportSize();
     let x = pX - _wcl.scrollX;
     let y = pY - _wcl.scrollY;
 
@@ -1118,7 +1118,7 @@ const init = {
 
     picker.focus();
   },
-  _onContextmenuClick: function(evt) {
+  _onContextmenuClick: function (evt) {
     const { wrap, picker } = this._nodes;
     const target = evt.target.closest('a');
     let aspectRatio = 0;
@@ -1138,13 +1138,13 @@ const init = {
 
     picker.querySelector('.aspect-ratio-picker__a--checked').classList.remove('aspect-ratio-picker__a--checked');
     target.classList.add('aspect-ratio-picker__a--checked');
-    
+
     wrap.classList.add('transform');
     this.refresh(this.rePosition());
     picker.blur();
   },
 
-  _onUnload: function() {
+  _onUnload: function () {
     const { cropIt, sign } = this._nodes;
 
     // DOM
@@ -1155,7 +1155,7 @@ const init = {
     try {
       this._data.controllerG.abort();
       this._data.controllerDD.abort();
-    } catch(err) {
+    } catch (err) {
       // some controllers might not init
     }
     this._evtList.forEach((evt) => this[evt] = null);
@@ -1169,7 +1169,7 @@ const init = {
     this._nodes = null;
     this._evtList = null;
   },
-  _getConfig: function() {
+  _getConfig: function () {
     chrome.storage.sync.get(null,
       ({ sensorSize = defaults.sensorSize, selectionColor = defaults.selectionColor, overlayBgc = defaults.overlayBgc, overlayOpacity = defaults.overlayOpacity }) => {
         this._environmentSetting({
@@ -1181,8 +1181,8 @@ const init = {
       }
     );
   },
-  rePosition: function() {
-    const { width:vW, height:vH } = _wcl.getViewportSize();
+  rePosition: function () {
+    const { width: vW, height: vH } = _wcl.getViewportSize();
     const { selectionMinSize, aspectRatio } = this._data;
     let sW = Math.floor(vW / 2);
     let sH = Math.floor(vH / 2);
@@ -1224,7 +1224,7 @@ const init = {
     };
   },
 
-  enviromentInit: function() {
+  enviromentInit: function () {
     if (document.querySelector('#ext-crop-it')) {
       return;
     }
@@ -1312,7 +1312,7 @@ const init = {
     });
   },
 
-  constructor: function () {      
+  constructor: function () {
     // evts
     this._evtList = [
       '_getConfig',
@@ -1337,7 +1337,7 @@ const init = {
     chrome.runtime.onMessage.addListener(this._onMessage);
     chrome.storage.onChanged.addListener((changes) => this._getConfig());
   }
- };
+};
 
 // wait until lib ready
 navigator.whenDefined('_wcl').then(

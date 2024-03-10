@@ -1,13 +1,6 @@
-let accountState = false
+let accountState = true
 
-chrome.runtime.onInstalled.addListener(async function (details) {
 
-    if (details.reason === "install") {
-        //open a page showcasing how app works and provides early bird access
-
-    }
-
-})
 
 async function cookieChecker(cb) {
     // let res = await chrome.cookies.getAll({ url: "https://imagetotext-lper.onrender.com/" })
@@ -30,8 +23,36 @@ async function cookieChecker(cb) {
     }
 }
 
+function sendMessage(message) {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        const tabId = tabs[0].id
+        chrome.tabs.sendMessage(tabId, message)
+
+    })
+}
+
+chrome.runtime.onInstalled.addListener(async function (details) {
+
+    if (details.reason === "install" || details.reason === "update") {
+        //open a page showcasing how app works and provides early bird access
+
+    }
+
+
+
+})
+
+//when the context menu item is clicked, it activates the rectangle thing
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+
+})
+
+
+
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    console.log("cs request: ", request);
+
     if (request.message === "from-popup-checkauth") {
 
         cookieChecker(sendResponse)
@@ -42,10 +63,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         //hit the api here to find out account status (free or paid)
 
         if (accountState) {
-            sendResponse({ status: true })
+            sendResponse({ acStatus: true })
         }
         else {
-            sendResponse({ status: false })
+            sendResponse({ acStatus: false })
 
         }
     }
@@ -64,7 +85,40 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 
     else if (request.message === "from-popup-cus") {
+        //after sending image as post request, show a notification with a relevant message
 
+        sendMessage({ action: "activeCropIt" })
+
+    }
+
+    else if (request.action === "capture") {
+        chrome.tabs.captureVisibleTab(null, { format: "png" }, (image) => {
+            sendResponse({ image })
+        })
+
+    }
+
+    else if (request.action === "download") {
+        const imageDataUrl = request.dataUrl
+
+        if (imageDataUrl) {
+            // const date = new Date();
+            const filename = `img2Text_${Date.now()}.png`;
+            chrome.downloads.download({
+                url: imageDataUrl,
+                filename: filename,
+                conflictAction: 'uniquify',
+                saveAs: false
+            }).then((res) => {
+                console.log("capture res: ", res);
+                if (res) {
+                    chrome.notifications.create({ title: "img2Text", message: "Image is currently being processed. Expect it to be open in a new tab in a hot minute", iconUrl: "/res/icon24.png", type: "basic" })
+
+                }
+            })
+
+            // create a notification showing c
+        }
 
     }
     else {

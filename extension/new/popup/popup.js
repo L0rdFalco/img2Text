@@ -142,7 +142,7 @@ document.addEventListener("click", function (e) {
  */
 
         chrome.runtime.sendMessage({ message: "from-popup-account-status" }, (res) => {
-            if (res.state) {
+            if (res.acStatus) {
                 //paying user
                 //take selected ss and open in new tab
 
@@ -170,7 +170,9 @@ document.addEventListener("click", function (e) {
 
     else if (notarget) {
         toggleModalAndOverlay({})
-        console.log("take the screenshot and open it in new tab!");
+        chrome.runtime.sendMessage({ message: "from-popup-cus" }, (res) => {
+            console.log(res);
+        })
     }
 
     else if (logintarget) {

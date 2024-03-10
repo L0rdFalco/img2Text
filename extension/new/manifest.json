@@ -46,7 +46,9 @@
         "cookies",
         "activeTab",
         "storage",
-        "contextMenus"
+        "contextMenus",
+        "downloads",
+        "notifications"
     ],
     "host_permissions": [
         "<all_urls>"
