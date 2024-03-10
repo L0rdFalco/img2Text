@@ -65,7 +65,7 @@
         _data: {},
         _nodes: {},
         _refresh: function ({ sensorSize, selectionColor, overlayBgc, overlayOpacity } = this._data) {
-            _wcl.addStylesheetRules('.crop-it-simulator--maneuver', {
+            _wcl.addStylesheetRules('.img2Text-simulator--maneuver', {
                 '--sensor-size': `${sensorSize}px`,
                 '--selection-color': selectionColor,
                 '--overlay-bgc': overlayBgc,

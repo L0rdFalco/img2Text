@@ -640,7 +640,7 @@ code {
     width: 95%;
 }
 
-.crop-it-simulator {
+.img2Text-simulator {
     --pseudo-length: calc(100% / 3);
     --pseudo-position: calc((100% - var(--pseudo-length)) / 2);
     --decorate-width: 4px;
@@ -671,7 +671,7 @@ code {
             0% 0%);
 }
 
-.crop-it-simulator {
+.img2Text-simulator {
     position: absolute;
     left: 0;
     top: 0;
@@ -679,7 +679,7 @@ code {
     height: 100%;
 }
 
-.crop-it-overlay {
+.img2Text-overlay {
     width: 100%;
     height: 100%;
     background-color: var(--overlay-bgc);
@@ -687,7 +687,7 @@ code {
     clip-path: var(--overlay-mask);
 }
 
-.crop-it-selection {
+.img2Text-selection {
     position: absolute;
     left: var(--x);
     top: var(--y);
@@ -700,7 +700,7 @@ code {
     box-shadow: inset 1px 1px 0 var(--serif-color), inset -1px -1px 0 var(--serif-color);
 }
 
-.crop-it-selection::before {
+.img2Text-selection::before {
     position: absolute;
     left: var(--pseudo-position);
     top: 0;
@@ -715,7 +715,7 @@ code {
     box-shadow: inset 1px 0 0 var(--serif-color), inset -1px 0 0 var(--serif-color);
 }
 
-.crop-it-selection::after {
+.img2Text-selection::after {
     position: absolute;
     top: var(--pseudo-position);
     left: 0;
@@ -752,7 +752,7 @@ code {
     transform: translateY(100%);
 }
 
-.crop-it-simulator--maneuver {}
+.img2Text-simulator--maneuver {}
 
 .selection-config {
     display: flex;

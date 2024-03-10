@@ -85,9 +85,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 
     else if (request.message === "from-popup-cus") {
-        //after sending image as post request, show a notification with a relevant message
 
-        sendMessage({ action: "activeCropIt" })
+        sendMessage({ action: "processImg" })
 
     }
 

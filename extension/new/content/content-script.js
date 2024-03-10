@@ -351,11 +351,11 @@ template4Shortcuts.innerHTML = `
     <a href="#close" class="shortcuts__close stuff" title="close" aria-label="close">close</a>
     <ul class="shortcuts__ul">
       <li class="shortcuts__li">
-        <kbd>Cmd</kbd> + <kbd>.</kbd>︰Turn on or off 「Crop It」.
+        <kbd>Cmd</kbd> + <kbd>.</kbd>︰Turn on or off 「img2Text It」.
       </li>
       
       <li class="shortcuts__li">
-        <kbd>Esc</kbd>︰Turn off 「Crop It」 or 「Shortcuts Guide」.
+        <kbd>Esc</kbd>︰Turn off 「img2Text It」 or 「Shortcuts Guide」.
       </li>
 
       <li class="shortcuts__li">
@@ -418,7 +418,7 @@ template4Sign.innerHTML = `
   .ext-crop-sign__svg{stroke:currentColor;stroke-width:1;stroke-dashoffset:var(--stroke-dashoffset);stroke-dasharray:var(--stroke-dashoffset);}
   .ext-crop-sign__p{font-size:1.125em;text-align:center;color:#fff;line-height:calc(120px - 120px * .7);}
   
-  :host(.act) .wrap{left:50%;top:50%;width:120px;height:120px;animation:ext-crop-it-sigh-show 1500ms ease forwards;}
+  :host(.act) .wrap{left:50%;top:50%;width:120px;height:120px;animation:ext-img2Text-sigh-show 1500ms ease forwards;}
   :host(.act) .ext-crop-sign__svg{animation:ext-crop-sign-checkmark-path 350ms ease calc(var(--duration) / 2) forwards;}
 
   @keyframes ext-crop-sign-checkmark-path {
@@ -427,7 +427,7 @@ template4Sign.innerHTML = `
     100%{stroke-dashoffset:0;}
   }
 
-  @keyframes ext-crop-it-sigh-show {
+  @keyframes ext-img2Text-sigh-show {
     0%{opacity:0;transform:scale(0);transition-timing-function:cubic-bezier(0, 0, .2, 1);}
     16%{opacity:1;transform:scale(1);}
     84%{opacity:1;transform:scale(1);}
@@ -877,7 +877,7 @@ const init = {
         const { key, metaKey, ctrlKey, shiftKey } = evt;
         const { wrap, shortcuts, btnCloseShortcuts, selection } = this._nodes;
 
-        if (!document.body.classList.contains('ext-crop-it-active')) {
+        if (!document.body.classList.contains('ext-img2Text-active')) {
             return;
         }
 
@@ -1043,13 +1043,13 @@ const init = {
         const { action } = request;
 
         switch (action) {
-            case 'activeCropIt':
+            case 'processImg':
                 this.enviromentInit();
 
                 // add event
                 document.addEventListener('keydown', init._onKeyDown, true);
 
-                document.body.classList.toggle('ext-crop-it-active');
+                document.body.classList.toggle('ext-img2Text-active');
                 document.body.focus();
                 break;
         }
@@ -1058,7 +1058,7 @@ const init = {
         const { sign } = this._nodes;
         const { animationName } = evt;
 
-        if (sign.classList.contains('act') && animationName === 'ext-crop-it-sigh-show') {
+        if (sign.classList.contains('act') && animationName === 'ext-img2Text-sigh-show') {
             sign.classList.remove('act');
         }
     },
@@ -1076,7 +1076,7 @@ const init = {
         document.removeEventListener('keydown', this._onKeyDown, true);
 
         btnCloseShortcuts.click();
-        document.body.classList.remove('ext-crop-it-active');
+        document.body.classList.remove('ext-img2Text-active');
     },
     _onCloseShortcuts: function (evt) {
         const { target } = evt;
@@ -1145,10 +1145,10 @@ const init = {
     },
 
     _onUnload: function () {
-        const { cropIt, sign } = this._nodes;
+        const { img2TextIt, sign } = this._nodes;
 
         // DOM
-        cropIt.remove();
+        img2TextIt.remove();
         sign.remove();
 
         // evts
@@ -1225,7 +1225,7 @@ const init = {
     },
 
     enviromentInit: function () {
-        if (document.querySelector('#ext-crop-it')) {
+        if (document.querySelector('#ext-img2Text')) {
             return;
         }
 
@@ -1240,14 +1240,14 @@ const init = {
         this._getConfig();
 
         // DOM
-        const cropIt = document.createElement('aside');
-        cropIt.id = 'ext-crop-it';
-        document.body.appendChild(cropIt);
-        const shadowRoot = cropIt.attachShadow({ mode: 'closed' });
+        const img2TextIt = document.createElement('aside');
+        img2TextIt.id = 'ext-img2Text';
+        document.body.appendChild(img2TextIt);
+        const shadowRoot = img2TextIt.attachShadow({ mode: 'closed' });
         shadowRoot.appendChild(template.content.cloneNode(true));
 
         const sign = document.createElement('aside');
-        sign.id = 'ext-crop-it-sign';
+        sign.id = 'ext-img2Text-sign';
         document.body.appendChild(sign);
         const shadowRoot4Sign = sign.attachShadow({ mode: 'closed' });
         shadowRoot4Sign.appendChild(template4Sign.content.cloneNode(true));
@@ -1259,7 +1259,7 @@ const init = {
         const btnCloseShortcuts = shadowRoot4Shortcuts.querySelector('.shortcuts__close');
 
         this._nodes = {
-            cropIt,
+            img2TextIt,
             sign,
             signWrap: shadowRoot4Sign.querySelector('.wrap'),
             selection: shadowRoot.querySelector('.selection'),
@@ -1290,8 +1290,8 @@ const init = {
         window.addEventListener('resize', this._onResize, { signal });
         window.addEventListener('beforeunload', this._onUnload, { signal });
 
-        // reset #ext-crop-it style
-        _wcl.addStylesheetRules('#ext-crop-it,#ext-crop-it-sign', {
+        // reset #ext-img2Text style
+        _wcl.addStylesheetRules('#ext-img2Text,#ext-img2Text-sign', {
             padding: 0,
             margin: 0,
             background: 'transparent',
@@ -1300,11 +1300,11 @@ const init = {
             float: 'none'
         });
 
-        _wcl.addStylesheetRules('body.ext-crop-it-active', {
+        _wcl.addStylesheetRules('body.ext-img2Text-active', {
             'pointer-events': 'none'
         });
 
-        _wcl.addStylesheetRules('body.ext-crop-it-active #ext-crop-it', {
+        _wcl.addStylesheetRules('body.ext-img2Text-active #ext-img2Text', {
             width: '100%',
             height: '100%',
             'pointer-events': 'auto',
