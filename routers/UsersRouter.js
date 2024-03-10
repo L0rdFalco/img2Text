@@ -14,7 +14,7 @@ UsersRouter.route("/logout").get(authController.protect, authController.logout)
 UsersRouter.route("/forgotpw").post(authController.forgotPassword)
 UsersRouter.route("/resetpw").post(authController.resetPassword)
 UsersRouter.route("/updatepw").post(authController.protect, authController.updatePassword)
-UsersRouter.route("/accout-state").post(authController.protect, usersController.accountState)
+UsersRouter.route("/account-state").get(authController.protect, usersController.accountState)
 
 
 module.exports = UsersRouter;
