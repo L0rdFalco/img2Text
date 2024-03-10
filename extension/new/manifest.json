@@ -1,6 +1,6 @@
 {
-    "name": "img to text",
-    "description": "extract text from any image instantly",
+    "name": "image to text with AI",
+    "description": "extract text from any image instantly using AI",
     "version": "0.0.1.1",
     "manifest_version": 3,
     "icons": {

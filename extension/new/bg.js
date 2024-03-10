@@ -43,7 +43,6 @@ chrome.runtime.onInstalled.addListener(async function (details) {
 })
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    console.log("cs request: ", request);
 
     if (request.message === "from-popup-checkauth") {
 
@@ -107,8 +106,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
                 }
             })
-
-            // create a notification showing c
         }
 
     }

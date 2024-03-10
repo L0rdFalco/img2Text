@@ -1,5 +1,6 @@
 (function () {
     const _wcl = window._wcl || {};
+
     Object.defineProperties(_wcl, {
         getUUID: {
             configurable: true,

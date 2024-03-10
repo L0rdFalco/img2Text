@@ -1,17 +1,5 @@
 'use strict';
 
-/*
- * reference:
- * ----------------------------
- * - clipboard: https://web.dev/async-clipboard/
- * - extension API > captureVisibleTab: https://developer.chrome.com/docs/extensions/reference/tabs/#method-captureVisibleTab
- * - canvas: https://developer.mozilla.org/zh-TW/docs/Web/API/Canvas_API/Tutorial
- * - canvas > drawImage: https://www.jianshu.com/p/03ed7933779d
- * - canvas > toDataURL: https://developer.mozilla.org/zh-TW/docs/Web/API/HTMLCanvasElement/toDataURL
- * - filename: https://discussions.apple.com/thread/251714867
- * - keyboard event: https://developer.mozilla.org/zh-TW/docs/Web/API/KeyboardEvent
- */
-
 // polyfill - navigator.whenDefined
 if (typeof navigator.whenDefined !== 'function') {
     Object.defineProperty(navigator, 'whenDefined', {
