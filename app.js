@@ -12,6 +12,7 @@ const passportSetup = require("./utils/passport-setup.js")
 const PurchasesRouter = require("./routers/PurchasesRouter.js")
 const UsersRouter = require("./routers/UsersRouter.js")
 const ViewsRouter = require("./routers/ViewsRouter.js")
+const MiscRouter = require("./routers/MiscRouter.js")
 
 const app = express()
 
@@ -67,6 +68,7 @@ app.use((request, response, next) => {
 app.use("/", ViewsRouter)
 app.use("/purchases", PurchasesRouter)
 app.use("/users", UsersRouter)
+app.use("/m", MiscRouter)
 
 app.all("*", (request, response, next) => {
     //one way of handling errors
