@@ -47,7 +47,7 @@ chrome.runtime.onInstalled.addListener(async function (details) {
 
 })
 
-function x(url, cb) {
+function xget(url, cb) {
 
     (async () => {
 
@@ -82,7 +82,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     else if (request.message === "from-popup-account-status") {
         //hit the api here to find out account status (free or paid)
-        x("http://127.0.0.1:3000/users/account-state", sendResponse)
+        xget("http://127.0.0.1:3000/users/account-state", sendResponse)
 
     }
 
@@ -116,7 +116,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         const imageDataUrl = request.dataUrl
 
         if (imageDataUrl) {
-            // const date = new Date();
+
             const filename = `img2Text_${Date.now()}.png`;
             chrome.downloads.download({
                 url: imageDataUrl,
@@ -130,7 +130,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
                     //open url with data image
 
-                    x("http://127.0.0.1:3000/img2text", null)
+                    // x("http://127.0.0.1:3000/img2text")
                 }
             })
         }

@@ -20,7 +20,7 @@ exports.getImg2textPage = (request, response, next) => {
 
         response.status(200).render("img2text")
 
-        response.status(400).json({ message: "/image2text" })
+        // response.status(400).json({ message: "/image2text" })
 
 
     } catch (error) {
