@@ -37,7 +37,7 @@ app.use(express.json({
     limit: "300kb"// limits the size of request data
 }))
 
-app.use(express.urlencoded({ extended: true, limit: '10kb' }))
+app.use(express.urlencoded({ extended: true, limit: '1000kb' }))
 
 //global middleware for adding cookie data to request object
 app.use(cookieParser())

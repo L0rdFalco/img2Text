@@ -15,6 +15,7 @@ UsersRouter.route("/forgotpw").post(authController.forgotPassword)
 UsersRouter.route("/resetpw").post(authController.resetPassword)
 UsersRouter.route("/updatepw").post(authController.protect, authController.updatePassword)
 UsersRouter.route("/account-state").get(authController.protect, usersController.accountState)
+UsersRouter.route("/save-img-url").post(authController.protect, usersController.saveImageBlob)
 
 
 module.exports = UsersRouter;

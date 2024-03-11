@@ -49,6 +49,15 @@ const UsersSchema = mongoose.Schema(
             type: String,
             default: "manual"
         },
+        imageBlobs: {
+            dataUrl: [
+                {
+                    type: String,
+                    date: Date.now
+
+                }
+            ]
+        },
         passwordChangedAt: Date,
         encrResetToken: String,
         resetTokenExpires: Date,

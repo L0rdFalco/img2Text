@@ -26,6 +26,14 @@ const SocialUsersSchema = mongoose.Schema(
             type: String,
             required: [true, "social user must have a provider"]
         },
+        imageBlobs: {
+            dataImgUrl: [
+                {
+                    type: String,
+                    date: Date.now
+                }
+            ]
+        },
         picture: {
             type: String,
             default: "default.jpg"

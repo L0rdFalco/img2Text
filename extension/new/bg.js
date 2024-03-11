@@ -72,6 +72,40 @@ function xget(url, cb) {
     })()
 }
 
+function xpost(url, postData, cb) {
+
+    (async () => {
+
+
+        try {
+
+
+            //hit the api here
+            const res1 = await fetch(url, {
+                method: "POST",
+                body: JSON.stringify(postData),
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+            })
+
+            const res2 = await res1.json()
+
+
+            console.log("send res: ", res2);
+
+            //open new tab here on success response
+
+
+
+
+        } catch (error) {
+
+            console.log(error);
+        }
+
+    })()
+}
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     if (request.message === "from-popup-checkauth") {
@@ -90,6 +124,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         chrome.tabs.captureVisibleTab(null, { format: "png" }, function (screenshotUrl) {
             console.log("taken? ", screenshotUrl.startsWith("data:image/png;base64"));
 
+
+
             if (screenshotUrl.startsWith("data:image/png;base64")) {
 
                 sendResponse({ message: "screenshot taken", payload: screenshotUrl })
@@ -107,6 +143,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     else if (request.action === "capture") {
         chrome.tabs.captureVisibleTab(null, { format: "png" }, (image) => {
+
+
             sendResponse({ image })
         })
 
@@ -114,6 +152,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     else if (request.action === "download") {
         const imageDataUrl = request.dataUrl
+        console.log(imageDataUrl);
+
+        xpost("http://127.0.0.1:3000/users/save-img-url", { imgUrl: imageDataUrl }, null)
 
         if (imageDataUrl) {
 
