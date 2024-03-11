@@ -113,7 +113,6 @@ exports.getDashboardPage = (request, response, next) => {
 exports.getActiveSubscriptionsPage = async (request, response, next) => {
     try {
 
-
         const subscriptionDocs = await SubscriptionModel.find({ user: request.user.id })
 
         response.status(200).render("subscriptions", {
@@ -156,11 +155,11 @@ exports.getOrderPage = async (request, response, next) => {
         let paypalUrl = null
 
         if (process.env.NODE_ENV === "production") {
-            paypalUrl = 'https://www.paypal.com/sdk/js?client-id=ARbrF0_8Vj4bybSyvQVFobLPkXB16NhCf7ev7lhbLxpHqTPMXTe2chGOijPlqU5o1goFiHQfF1Il8sX6&currency=USD'
+            paypalUrl = `https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_LIVE_CLIENT_ID}&currency=USD`
 
         }
         else if (process.env.NODE_ENV === "development") {
-            paypalUrl = 'https://www.paypal.com/sdk/js?client-id=AcJ_7BJdbdAszTLfZC1v8qNZo0gofMOVtr7iZ7X29AxloH7167Sq0mLn0prcFxgLWJcs4t1NQycOQt3O&currency=USD'
+            paypalUrl = `https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_SANDBOX_CLIENT_ID}&currency=USD`
         }
 
 

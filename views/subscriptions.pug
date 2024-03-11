@@ -10,47 +10,32 @@ block content
       //-   .layout-menu-toggle.navbar-nav.align-items-xl-center.me-3.me-xl-0.d-xl-none
       //-     a.nav-item.nav-link.px-0.me-xl-4(href='javascript:void(0)')
       //-       i.bx.bx-menu.bx-sm
-        //- #navbar-collapse.navbar-nav-right.d-flex.align-items-center
-        //-   // Search
-        //-   include _dash_search
-        //-   // /Search
-        //-   include _dash_dropdown
+      //- #navbar-collapse.navbar-nav-right.d-flex.align-items-center
+      //-   // Search
+      //-   include _dash_search
+      //-   // /Search
+      //-   include _dash_dropdown
       .container-xxl.flex-grow-1.container-p-y
         .row
           .card
-            h5.card-header list of subscriptions
-            .table-responsive.text-nowrap
-              table.table
-                thead
-                  tr
-                    th name
-                    th price
-                    th end date
-                    th status
-                    th Actions
+            h5.card-header current subscription
                 tbody.table-border-bottom-0
                   if data
-                    each sub in data
-                      tr
-                        td
-                          i.fab.fa-angular.fa-lg.text-danger.me-3
-                          |  
-                          strong=`${sub.product.name}`
-                        td=`${sub.price}`
-                        td=`${sub.endDate}`
-                        td
-                          span.badge.bg-label-primary.me-1=`${sub.status}`
-                        td
-                          .dropdown
-                            button.btn.p-0.dropdown-toggle.hide-arrow(type='button', data-bs-toggle='dropdown')
-                              i.bx.bx-dots-vertical-rounded
-                            .dropdown-menu
-                              a.dropdown-item(href='javascript:void(0);')
-                                i.bx.bx-edit-alt.me-1
-                                  Edit
-                              a.dropdown-item(href='javascript:void(0);')
-                                i.bx.bx-trash.me-1
-                                  Delete
+                    each sSubscr in data
+                      .products-row
+                        a(href=`#`) 
+                          .product-cell.image
+                            img(src=`/assets/img/illustrations/girl-doing-yoga-light.png`, alt='manuscript image')
+                            br
+                            span= `package name: ${sSubscr.package.name} ` 
+                            br
+                            span= `price: $${sSubscr.price}`
+                            br
+                            span= `creation date: ${sSubscr.createdAt}`
+                            br
+                            span= `expiry date: ${sSubscr.endDate}`
+                            br
+                            span= `payment cycle : ${sSubscr.paymentCycle}`
                   //- tr
                   //-   td
                   //-     i.fab.fa-react.fa-lg.text-info.me-3

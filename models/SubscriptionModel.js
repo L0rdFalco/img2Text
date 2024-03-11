@@ -15,7 +15,7 @@ const subscriptionsSchema = mongoose.Schema({
         required: [true, "subscription must have a price"]
     },
 
-    paypayCaptureId: {
+    paypalCaptureId: {
         type: String,
         required: [true, "subscription must have a paypal capture id"]
     },
