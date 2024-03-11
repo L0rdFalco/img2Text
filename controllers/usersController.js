@@ -8,26 +8,27 @@ exports.accountState = async (request, response, next) => {
 
         const savedUser = await SubscriptionModel.findOne({ user: currUser })
 
-        console.log(savedUser);
-
         //find out if current user has a paid valid subscription
         //return appropriate response
 
-        if (savedUser) {
+        if (savedUser) { //premium user
+            console.log("premium user");
 
-            response.status(400).json({ message: "premium user" })
+            return response.status(400).json({ message: "CO>(ZPF5tgU?1wJ" })
 
         }
 
-        else {
-            response.status(400).json({ message: "free user" })
+        else {//free user
+            console.log("free user");
+
+            return response.status(400).json({ message: "hP(^WuJ(hHk0u8F" })
 
         }
 
 
     } catch (error) {
         console.log(error);
-        response.status(400).json({ message: "getTestPage failed" })
+        return response.status(400).json({ message: "getTestPage failed" })
     }
 
 }

@@ -17,7 +17,11 @@ exports.getTestPage = (request, response, next) => {
 exports.getImg2textPage = (request, response, next) => {
     try {
 
+
         response.status(200).render("img2text")
+
+        response.status(400).json({ message: "/image2text" })
+
 
     } catch (error) {
         console.log(error);

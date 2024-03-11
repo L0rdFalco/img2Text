@@ -142,12 +142,10 @@ document.addEventListener("click", function (e) {
  */
 
         chrome.runtime.sendMessage({ message: "from-popup-account-status" }, (res) => {
-            if (res.acStatus) {
-                //paying user
-                //take selected ss and open in new tab
+            if (res.payload === "CO>(ZPF5tgU?1wJ") {
 
                 chrome.runtime.sendMessage({ message: "from-popup-cus" }, (res) => {
-                    console.log(res);
+                    // console.log(res);
                 })
 
             }

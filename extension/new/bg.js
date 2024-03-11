@@ -25,6 +25,11 @@ async function cookieChecker(cb) {
 
 function sendMessage(message) {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        if (!(tabs[0].url).startsWith("http")) {
+            return chrome.notifications.create({ title: "img2Text Error", message: "PROHIBITED PAGE!", iconUrl: "/res/icon24.png", type: "basic" })
+
+        };
+
         const tabId = tabs[0].id
         chrome.tabs.sendMessage(tabId, message)
 
@@ -42,6 +47,31 @@ chrome.runtime.onInstalled.addListener(async function (details) {
 
 })
 
+function x(url, cb) {
+
+    (async () => {
+
+
+        try {
+
+            //hit the api here
+            let res1 = await fetch(url)
+
+            const res2 = await res1.json()
+
+
+            const message = res2.message;
+
+            return cb({ payload: message })
+
+        } catch (error) {
+
+            console.log(error);
+        }
+
+    })()
+}
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     if (request.message === "from-popup-checkauth") {
@@ -52,14 +82,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     else if (request.message === "from-popup-account-status") {
         //hit the api here to find out account status (free or paid)
+        x("http://127.0.0.1:3000/users/account-state", sendResponse)
 
-        if (accountState) {
-            sendResponse({ acStatus: true })
-        }
-        else {
-            sendResponse({ acStatus: false })
-
-        }
     }
 
     else if (request.message === "from-popup-wp") {
@@ -104,6 +128,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 if (res) {
                     chrome.notifications.create({ title: "img2Text", message: "Image is currently being processed. Expect it to be open in a new tab in a hot minute", iconUrl: "/res/icon24.png", type: "basic" })
 
+                    //open url with data image
+
+                    x("http://127.0.0.1:3000/img2text", null)
                 }
             })
         }
