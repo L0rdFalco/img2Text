@@ -79,15 +79,23 @@ function xpost(url, postData, cb) {
 
         try {
 
+            console.log(postData.imgUrl);
+            console.log("len: ", postData.imgUrl.split("").length);
+            const editedData = postData.imgUrl.replace(/\+/g, "?");
 
-            //hit the api here
+            // console.log(editedData);
+
+            const formData = new FormData();
+            formData.append("content", editedData);
+
             const res1 = await fetch(url, {
-                method: "POST",
-                body: JSON.stringify(postData),
+                method: 'POST',
+                body: formData,
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
                 },
-            })
+            });
+
 
             const res2 = await res1.json()
 
@@ -152,7 +160,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     else if (request.action === "download") {
         const imageDataUrl = request.dataUrl
-        console.log(imageDataUrl);
 
         xpost("http://127.0.0.1:3000/users/save-img-url", { imgUrl: imageDataUrl }, null)
 
