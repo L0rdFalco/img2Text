@@ -66,13 +66,13 @@ function openTab(url) {
 })()
 
 
-function loader() {
+function loader(mgsArr) {
 
     parentCont.innerHTML = `
     <div id="main" class="activationContent">
     <div id="msg">
-        <h3>Processing the screenshot.</h3>
-        <h3>Please be patient...</h3>
+        <h3>${mgsArr[0]}</h3>
+        <h3>${mgsArr[1]}...</h3>
     </div>
     <div class="boxes">
         <div class="box">
@@ -124,7 +124,7 @@ document.addEventListener("click", function (e) {
                 //rewrite the dom to show appropriate message
                 //post request with image url data
 
-                loader()
+                loader(["Processing the screenshot.", "Please be patient"])
 
 
             }
@@ -148,7 +148,7 @@ document.addEventListener("click", function (e) {
 
         chrome.runtime.sendMessage({ message: "from-popup-account-status" }, (res) => {
             if (res.payload === "CO>(ZPF5tgU?1wJ") {
-                loader()
+                loader(["1. Select the area to screenshot", "2. Press Enter or double click Rectangle"])
 
                 chrome.runtime.sendMessage({ message: "from-popup-cus" }, (res) => {
                     // console.log(res);
@@ -157,6 +157,7 @@ document.addEventListener("click", function (e) {
             }
             else {
                 //free user
+                loader(["", ""])
                 toggleModalAndOverlay({
                     heading: "feature restricted!",
                     message: "Please pay to unlock. I also got bills ;)",
@@ -174,7 +175,7 @@ document.addEventListener("click", function (e) {
 
     else if (notarget) {
         toggleModalAndOverlay({})
-        loader()
+        loader(["1. Select the area to screenshot", "2. Press Enter or double click Rectangle"])
         chrome.runtime.sendMessage({ message: "from-popup-cus" }, (res) => {
             console.log(res);
         })

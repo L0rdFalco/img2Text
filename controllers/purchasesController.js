@@ -78,9 +78,9 @@ exports.capturePayment = async (request, response, next) => {
         const userId = request.user.id
 
         const sPackage = await PackagesModel.findById(request.body.packageId)
-        if (sPackage.name === "basic") expiryDate = helpers.endDate(30)[1]
-        if (sPackage.name === "premium") expiryDate = helpers.endDate(180)[1]
-        if (sPackage.name === "platinum") expiryDate = helpers.endDate(365)[1]
+        if (sPackage.name === "one") expiryDate = helpers.endDate(30)[1]
+        if (sPackage.name === "two") expiryDate = helpers.endDate(180)[1]
+        if (sPackage.name === "three") expiryDate = helpers.endDate(365)[1]
 
         let baseUrl = null;
 
