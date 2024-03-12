@@ -151,8 +151,8 @@ exports.capturePayment = async (request, response, next) => {
         }
 
         //meaning that current user wants to buy a basic package
-        else if (!SubsModel && sPackage.name === "basic") {
-            console.log("free user buying a basic package");
+        else if (!SubsModel && sPackage.name === "one") {
+            console.log("free user buying a one package");
             // add user to subscriptions collection
 
             const newPaidUser = await SubscriptionModel.create({
@@ -174,14 +174,14 @@ exports.capturePayment = async (request, response, next) => {
             }
             else {
                 return response.status(200).json({
-                    message: "something went wrong when buying basic package. Try again",
+                    message: "something went wrong when buying one package. Try again",
                 })
             }
 
         }
         //meaning that current user wants to buy a premium package
-        else if (!SubsModel && sPackage.name === "premium") {
-            console.log("free user buying a premium package");
+        else if (!SubsModel && sPackage.name === "two") {
+            console.log("free user buying a two package");
             // add user to subscriptions collection
 
             const newPaidUser = await SubscriptionModel.create({
@@ -203,14 +203,14 @@ exports.capturePayment = async (request, response, next) => {
             }
             else {
                 return response.status(200).json({
-                    message: "something went wrong when buying premium package. Try again",
+                    message: "something went wrong when buying two package. Try again",
                 })
             }
         }
 
         //meaning that current user wants to buy a platinum package
-        else if (!SubsModel && sPackage.name === "platinum") {
-            console.log("free user buying a platinum package");
+        else if (!SubsModel && sPackage.name === "three") {
+            console.log("free user buying a three package");
 
             const newPaidUser = await SubscriptionModel.create({
                 package: sPackage.id,
@@ -231,7 +231,7 @@ exports.capturePayment = async (request, response, next) => {
             }
             else {
                 return response.status(200).json({
-                    message: "something went wrong when buying platinum package. Try again",
+                    message: "something went wrong when buying three package. Try again",
                 })
             }
         }

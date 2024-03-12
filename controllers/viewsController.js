@@ -1,8 +1,9 @@
 const PackagesModel = require("../models/PackagesModel.js")
 const SubscriptionModel = require("../models/SubscriptionModel.js")
 
-exports.getTestPage = (request, response, next) => {
+exports.getTestPage = async (request, response, next) => {
     try {
+
 
         response.status(200).render("test")
 

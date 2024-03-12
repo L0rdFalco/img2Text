@@ -66,6 +66,47 @@ function openTab(url) {
 })()
 
 
+function loader() {
+
+    parentCont.innerHTML = `
+    <div id="main" class="activationContent">
+    <div id="msg">
+        <h3>Processing the screenshot.</h3>
+        <h3>Please be patient...</h3>
+    </div>
+    <div class="boxes">
+        <div class="box">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="box">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="box">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="box">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div> </div>
+        </div>
+    </div>
+
+
+</div>
+    
+    `
+
+}
 document.addEventListener("click", function (e) {
     const wp_screenshottarget = e.target.closest("#wp_screenshot"); // whole page ss
     const custom_screenshottarget = e.target.closest("#cus_screenshot");// custom ss
@@ -83,43 +124,7 @@ document.addEventListener("click", function (e) {
                 //rewrite the dom to show appropriate message
                 //post request with image url data
 
-                parentCont.innerHTML = `
-                <div id="main" class="activationContent">
-                <div id="msg">
-                    <h3>Processing the screenshot.</h3>
-                    <h3>Please be patient...</h3>
-                </div>
-                <div class="boxes">
-                    <div class="box">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                    <div class="box">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                    <div class="box">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                    <div class="box">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div> </div>
-                    </div>
-                </div>
-    
-    
-            </div>
-                
-                `
+                loader()
 
 
             }
@@ -143,6 +148,7 @@ document.addEventListener("click", function (e) {
 
         chrome.runtime.sendMessage({ message: "from-popup-account-status" }, (res) => {
             if (res.payload === "CO>(ZPF5tgU?1wJ") {
+                loader()
 
                 chrome.runtime.sendMessage({ message: "from-popup-cus" }, (res) => {
                     // console.log(res);
@@ -168,6 +174,7 @@ document.addEventListener("click", function (e) {
 
     else if (notarget) {
         toggleModalAndOverlay({})
+        loader()
         chrome.runtime.sendMessage({ message: "from-popup-cus" }, (res) => {
             console.log(res);
         })
