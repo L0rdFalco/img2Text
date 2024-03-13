@@ -1,12 +1,26 @@
 let accountState = true
-
+let expired = true;
+let cookieName = null;
 
 
 async function cookieChecker(cb) {
     // let res = await chrome.cookies.getAll({ url: "https://imagetotext-lper.onrender.com/" })
     let res = await chrome.cookies.getAll({ url: "http://127.0.0.1:3000/" })
 
-    if (res.length == 0) {
+    console.log("cookies arr", res);
+
+    for (let i in res) {
+        if (res[i]["name"] === "Auth_Cookie") {
+            expired = false
+            break
+
+        }
+
+
+    }
+
+    console.log("expired? ", expired);
+    if (expired) {
 
         cb({
             status: false,
@@ -21,6 +35,9 @@ async function cookieChecker(cb) {
             message: "website logged in"
         })
     }
+
+
+
 }
 
 function sendMessage(message) {
