@@ -147,6 +147,7 @@ document.addEventListener("click", function (e) {
  */
 
         chrome.runtime.sendMessage({ message: "from-popup-account-status" }, (res) => {
+            console.log("res ===> ", res);
             if (res.payload === "CO>(ZPF5tgU?1wJ") {
                 loader(["1. Select the area to screenshot", "2. Press Enter or double click Rectangle"])
 

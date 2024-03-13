@@ -176,8 +176,24 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     }
 
+    else if (request.message === "from-newtab-getUrl") {
+        console.log("here");
+        chrome.storage.local.get(["imgUrl"])
+            .then((result) => {
+                sendResponse({ data: result })
+                console.log("image value is set");
+            });
+
+    }
+
     else if (request.action === "download") {
         const imageDataUrl = request.dataUrl
+
+        chrome.storage.local.set({ imgUrl: imageDataUrl })
+            .then(() => { console.log("image value is set"); });
+
+        openTab("/web/res.html")
+
 
         xpost("http://127.0.0.1:3000/users/save-img-url", { imgUrl: imageDataUrl }, null)
 
@@ -225,9 +241,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 
 //another way of open a url in a new tab
-function openTab() {
+function openTab(sentUrl) {
     chrome.tabs.create({
-        url: "popup/popup.html"
+        url: sentUrl
     })
 }
 

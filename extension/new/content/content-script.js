@@ -1039,6 +1039,7 @@ const init = {
 
                 document.body.classList.toggle('ext-img2Text-active');
                 document.body.focus();
+
                 break;
         }
     },
