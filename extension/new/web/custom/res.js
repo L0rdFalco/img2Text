@@ -4,7 +4,7 @@ const ssEl = document.getElementById("ss_img")
 
 
 
-chrome.runtime.sendMessage({ message: "from-newtab-getUrl-whoe" }, (res) => {
+chrome.runtime.sendMessage({ message: "from-newtab-getUrl-cus" }, (res) => {
     console.log("returned res: ", res);
 
     if (res.data) {
