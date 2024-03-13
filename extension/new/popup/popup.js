@@ -162,7 +162,7 @@ document.addEventListener("click", function (e) {
                     heading: "feature restricted!",
                     message: "Please pay to unlock. I also got bills ;)",
                     btnText: "pay a one time $5!",
-                    link: "#"
+                    link: "http://127.0.0.1:3000/pricing"
 
 
                 })

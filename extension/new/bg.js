@@ -115,6 +115,7 @@ function xpost(url, postData, cb) {
     })()
 }
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    console.log(request);
 
     if (request.message === "from-popup-checkauth") {
 
