@@ -152,7 +152,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             console.log("taken? ", taken);
 
             if (taken) {
-                chrome.storage.local.set({ whole_imgUrl: imageDataUrl })
+                chrome.storage.local.set({ "whole_imgUrl": screenshotUrl })
                     .then(() => { console.log("whole image value is set"); });
 
                 const filename = `img2Text_${Date.now()}.png`;
@@ -169,7 +169,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
                         xpost("http://127.0.0.1:3000/users/save-img-url", { imgUrl: screenshotUrl }, null)
 
-                        openTab("/res/full/res.html", { page: "whole" })
+                        openTab("/web/full/res.html", { page: "whole" })
                     }
                 })
 

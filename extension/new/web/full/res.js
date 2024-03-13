@@ -4,12 +4,12 @@ const ssEl = document.getElementById("ss_img")
 
 
 
-chrome.runtime.sendMessage({ message: "from-newtab-getUrl-cus" }, (res) => {
+chrome.runtime.sendMessage({ message: "from-newtab-getUrl-whole" }, (res) => {
     console.log("returned res: ", res);
 
     if (res.data) {
 
-        ssEl.src = res.data.cus_imgUrl
+        ssEl.src = res.data.whole_imgUrl
     }
 })
 
