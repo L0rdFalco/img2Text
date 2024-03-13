@@ -148,11 +148,32 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     else if (request.message === "from-popup-wp") {
         chrome.tabs.captureVisibleTab(null, { format: "png" }, function (screenshotUrl) {
-            console.log("taken? ", screenshotUrl.startsWith("data:image/png;base64"));
+            const taken = screenshotUrl.startsWith("data:image/png;base64");
+            console.log("taken? ", taken);
+
+            if (taken) {
+                chrome.storage.local.set({ whole_imgUrl: imageDataUrl })
+                    .then(() => { console.log("whole image value is set"); });
+
+                const filename = `img2Text_${Date.now()}.png`;
+
+                chrome.downloads.download({
+                    url: screenshotUrl,
+                    filename: filename,
+                    conflictAction: 'uniquify',
+                    saveAs: false
+                }).then((res) => {
+                    console.log("capture res: ", res);
+                    if (res) {
+                        chrome.notifications.create({ title: "img2Text", message: "Image is currently being processed. Expect it to be open in a new tab in a hot minute", iconUrl: "/res/icon24.png", type: "basic" })
+
+                        xpost("http://127.0.0.1:3000/users/save-img-url", { imgUrl: screenshotUrl }, null)
+
+                        openTab("/res/full/res.html", { page: "whole" })
+                    }
+                })
 
 
-
-            if (screenshotUrl.startsWith("data:image/png;base64")) {
 
                 sendResponse({ message: "screenshot taken", payload: screenshotUrl })
             }
@@ -176,9 +197,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     }
 
-    else if (request.message === "from-newtab-getUrl") {
-        console.log("here");
-        chrome.storage.local.get(["imgUrl"])
+    else if (request.message === "from-newtab-getUrl-cus") {
+        chrome.storage.local.get(["cus_imgUrl"])
             .then((result) => {
                 sendResponse({ data: result })
                 console.log("image value is set");
@@ -186,13 +206,22 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     }
 
+    else if (request.message === "from-newtab-getUrl-whole") {
+        chrome.storage.local.get(["whole_imgUrl"])
+            .then((result) => {
+                sendResponse({ data: result })
+                console.log("image value is set");
+            });
+
+    }
     else if (request.action === "download") {
         const imageDataUrl = request.dataUrl
 
-        chrome.storage.local.set({ imgUrl: imageDataUrl })
+        //use tabId as key
+        chrome.storage.local.set({ cus_imgUrl: imageDataUrl })
             .then(() => { console.log("image value is set"); });
 
-        openTab("/web/res.html")
+        openTab("/web/custom/res.html", { page: "cus" })
 
 
         xpost("http://127.0.0.1:3000/users/save-img-url", { imgUrl: imageDataUrl }, null)
@@ -200,6 +229,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         if (imageDataUrl) {
 
             const filename = `img2Text_${Date.now()}.png`;
+
             chrome.downloads.download({
                 url: imageDataUrl,
                 filename: filename,
@@ -241,9 +271,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 
 //another way of open a url in a new tab
-function openTab(sentUrl) {
+function openTab(sentUrl, tabData) {
     chrome.tabs.create({
         url: sentUrl
     })
+
 }
 
