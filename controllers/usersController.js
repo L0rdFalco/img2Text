@@ -40,27 +40,7 @@ exports.accountState = async (request, response, next) => {
 
 exports.saveImageBlob = async (request, response, next) => {
 
-    const data = request.body
 
-    let xData = null
-
-    Object.keys(data).forEach(key => {
-        xData = data[key];
-
-    });
-    let xxData = xData.split("------WebKit")[0]
-    let xxxData = xxData.split('tent"')[1]
-
-    const fData = xxxData.replace(/\?/g, "+");
-
-    const worker = await tes.createWorker('eng');
-    const ret = await worker.recognize(fData);
-    console.log(ret.data.text);
-    await worker.terminate();
-
-
-
-    return response.status(200).json({ messge: "123" })
 
 
     let currUser = null

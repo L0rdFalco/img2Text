@@ -89,48 +89,7 @@ function xget(url, cb) {
     })()
 }
 
-function xpost(url, postData, cb) {
 
-    (async () => {
-
-
-        try {
-
-            console.log(postData.imgUrl);
-            console.log("len: ", postData.imgUrl.split("").length);
-            const editedData = postData.imgUrl.replace(/\+/g, "?");
-
-            // console.log(editedData);
-
-            const formData = new FormData();
-            formData.append("content", editedData);
-
-            const res1 = await fetch(url, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-            });
-
-
-            const res2 = await res1.json()
-
-
-            console.log("send res: ", res2);
-
-            //open new tab here on success response
-
-
-
-
-        } catch (error) {
-
-            console.log(error);
-        }
-
-    })()
-}
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log(request);
 
