@@ -6,7 +6,6 @@ function xpost(endpoint, imgUrl) {
 
     (async () => {
 
-
         try {
 
             console.log(imgUrl);
@@ -25,15 +24,9 @@ function xpost(endpoint, imgUrl) {
                 },
             });
 
+            const res2 = await res1.json()
 
-            return await res1.json()
-
-
-            console.log("returned whole image res: ", res2);
-
-            //open new tab here on success response
-
-
+            extractedTextEl.innerText = res2.message
 
 
         } catch (error) {
@@ -57,13 +50,14 @@ chrome.runtime.sendMessage({ message: "from-newtab-getUrl-whole" }, (res) => {
 extractBtn.addEventListener("click", function (e) {
     //hit api and set text to element
     //remove the imgUrl from storage
+    extractedTextEl.innerText = "starting text extraction on image on the right..."
+
     const imgDataUrl = ssEl.getAttribute("src")
 
     if (imgDataUrl.startsWith("data:image/png;base64")) {
 
-        const mText = xpost("http://127.0.0.1:3000/m/extract-text", imgDataUrl)
+        xpost("http://127.0.0.1:3000/m/extract-text", imgDataUrl)
 
-        extractedTextEl.innerText = mText
 
     }
 

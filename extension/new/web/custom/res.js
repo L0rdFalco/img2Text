@@ -26,15 +26,11 @@ function xpost(endpoint, imgUrl) {
                 },
             });
 
+            const res2 = await res1.json()
 
-            return await res1.json()
+            extractedTextEl.innerText = res2.message
 
-
-            console.log("returned custom image res: ", res2);
-
-            //open new tab here on success response
-
-
+            //send a message to bg script to clear storage
 
 
         } catch (error) {
@@ -48,8 +44,6 @@ function xpost(endpoint, imgUrl) {
 
 
 chrome.runtime.sendMessage({ message: "from-newtab-getUrl-cus" }, (res) => {
-    console.log("returned res: ", res);
-
     if (res.data) {
 
         ssEl.src = res.data.cus_imgUrl
@@ -60,13 +54,15 @@ extractBtn.addEventListener("click", function (e) {
     //hit api and set text to element
     //remove the imgUrl from storage
 
+    extractedTextEl.innerText = "starting text extraction on the image on the right..."
+
     const imgDataUrl = ssEl.getAttribute("src")
 
     if (imgDataUrl.startsWith("data:image/png;base64")) {
 
         const mText = xpost("http://127.0.0.1:3000/m/extract-text", imgDataUrl)
 
-        extractedTextEl.innerText = mText
+
 
 
     }

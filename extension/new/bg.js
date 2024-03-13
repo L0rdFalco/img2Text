@@ -7,19 +7,13 @@ async function cookieChecker(cb) {
     // let res = await chrome.cookies.getAll({ url: "https://imagetotext-lper.onrender.com/" })
     let res = await chrome.cookies.getAll({ url: "http://127.0.0.1:3000/" })
 
-    console.log("cookies arr", res);
-
     for (let i in res) {
         if (res[i]["name"] === "Auth_Cookie") {
             expired = false
             break
-
         }
-
-
     }
 
-    console.log("expired? ", expired);
     if (expired) {
 
         cb({
@@ -35,8 +29,6 @@ async function cookieChecker(cb) {
             message: "website logged in"
         })
     }
-
-
 
 }
 
@@ -57,17 +49,13 @@ chrome.runtime.onInstalled.addListener(async function (details) {
 
     if (details.reason === "install" || details.reason === "update") {
         //open a page showcasing how app works and provides early bird access
-
     }
-
-
 
 })
 
 function xget(url, cb) {
 
     (async () => {
-
 
         try {
 
@@ -91,7 +79,6 @@ function xget(url, cb) {
 
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    console.log(request);
 
     if (request.message === "from-popup-checkauth") {
 
@@ -112,7 +99,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
             if (taken) {
                 chrome.storage.local.set({ "whole_imgUrl": screenshotUrl })
-                    .then(() => { console.log("whole image value is set"); });
+                    .then(() => { });
 
                 const filename = `img2Text_${Date.now()}.png`;
 
@@ -122,11 +109,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                     conflictAction: 'uniquify',
                     saveAs: false
                 }).then((res) => {
-                    console.log("capture res: ", res);
                     if (res) {
                         chrome.notifications.create({ title: "img2Text", message: "Image is currently being processed. Expect it to be open in a new tab in a hot minute", iconUrl: "/res/icon24.png", type: "basic" })
-
-                        xpost("http://127.0.0.1:3000/users/save-img-url", { imgUrl: screenshotUrl }, null)
 
                         openTab("/web/full/res.html", { page: "whole" })
                     }
@@ -160,7 +144,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         chrome.storage.local.get(["cus_imgUrl"])
             .then((result) => {
                 sendResponse({ data: result })
-                console.log("image value is set");
             });
 
     }
@@ -181,9 +164,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             .then(() => { console.log("image value is set"); });
 
         openTab("/web/custom/res.html", { page: "cus" })
-
-
-        xpost("http://127.0.0.1:3000/users/save-img-url", { imgUrl: imageDataUrl }, null)
 
         if (imageDataUrl) {
 

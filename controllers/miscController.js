@@ -25,7 +25,7 @@ exports.extractText = (request, response, next) => {
 
 
 
-            return response.status(200).json({ messge: extractedText })
+            return response.status(200).json({ message: extractedText })
 
             //maybe save all this stuff to the db later on
         })();
