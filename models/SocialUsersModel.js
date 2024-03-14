@@ -56,7 +56,6 @@ const SocialUsersSchema = mongoose.Schema(
         },
         locale: {
             type: String,
-            required: [true, "social user must have a given locale"]
         },
         role: {
             type: String,
