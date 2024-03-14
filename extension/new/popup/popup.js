@@ -1,6 +1,7 @@
 const mainCont = document.getElementById("main")
 const parentCont = document.getElementById("parent")
 const btnDivCont = document.getElementById("btnDiv");
+const errorEl = document.getElementById("error");
 
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
@@ -120,7 +121,6 @@ document.addEventListener("click", function (e) {
         // take screenshot, open in new tab send it as post request for processing
 
         chrome.runtime.sendMessage({ message: "from-popup-wp" }, (res) => {
-            console.log("wp res:", res);
 
             if (res.message === "screenshot taken") {
                 //rewrite the dom to show appropriate message
@@ -131,7 +131,7 @@ document.addEventListener("click", function (e) {
 
             }
             else {
-                console.log("something went wrong!");
+                console.log("something went wrong when processing screenshots!");
             }
             // let image = new Image();
             // image.src = res.payload;
@@ -149,12 +149,10 @@ document.addEventListener("click", function (e) {
  */
 
         chrome.runtime.sendMessage({ message: "from-popup-account-status" }, (res) => {
-            console.log("res ===> ", res);
             if (res.payload === "CO>(ZPF5tgU?1wJ") {
                 loader(["1. Select the area to screenshot", "2. Press Enter or double click Rectangle"])
 
                 chrome.runtime.sendMessage({ message: "from-popup-cus" }, (res) => {
-                    // console.log(res);
                 })
 
             }
@@ -180,7 +178,6 @@ document.addEventListener("click", function (e) {
         toggleModalAndOverlay({})
         loader(["1. Select the area to screenshot", "2. Press Enter or double click Rectangle"])
         chrome.runtime.sendMessage({ message: "from-popup-cus" }, (res) => {
-            console.log(res);
         })
     }
 
@@ -196,3 +193,23 @@ document.addEventListener("click", function (e) {
 
 
 })
+
+
+chrome.runtime.onMessage.addListener((request) => {
+    console.log("sent req ", request);
+
+    if (request.source === "xget") {
+        errorMessage(request.message)
+    }
+})
+
+
+function errorMessage(message) {
+    errorEl.innerText = message
+    errorEl.style.display = "block"
+
+    setTimeout(() => {
+        errorEl.style.display = "none"
+
+    }, 3000)
+}

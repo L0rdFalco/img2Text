@@ -1,6 +1,7 @@
 const extractBtn = document.getElementById("extract_btn")
 const extractedTextEl = document.getElementById("extracted_text")
 const ssEl = document.getElementById("ss_img")
+const errorEl = document.getElementById("error")
 
 function xpost(endpoint, imgUrl) {
 
@@ -31,10 +32,24 @@ function xpost(endpoint, imgUrl) {
 
         } catch (error) {
 
+            errorMessage("server not available. Try again!")
+
             console.log(error);
         }
 
     })()
+}
+
+function errorMessage(message) {
+    errorEl.innerText = message
+    errorEl.style.display = "block"
+    extractedTextEl.innerText = ""
+
+
+    setTimeout(() => {
+        errorEl.style.display = "none"
+
+    }, 3000)
 }
 
 

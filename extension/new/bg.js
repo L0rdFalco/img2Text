@@ -72,6 +72,15 @@ function xget(url, cb) {
         } catch (error) {
 
             console.log(error);
+            chrome.runtime.sendMessage({
+                source: "xget",
+                message: "Server not available. Try again!",
+
+            });
+            // chrome.tabs.query({}, function (tabs) {
+            //     tabs.forEach((tab) => {
+            //     });
+            // });
         }
 
     })()
@@ -153,7 +162,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         chrome.storage.local.get(["whole_imgUrl"])
             .then((result) => {
                 sendResponse({ data: result })
-                console.log("image value is set");
+
             });
 
     }
@@ -162,7 +171,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
         //use tabId as key
         chrome.storage.local.set({ cus_imgUrl: imageDataUrl })
-            .then(() => { console.log("image value is set"); });
+            .then(() => { });
 
         openTab("/web/custom/res.html", { page: "cus" })
 
@@ -176,13 +185,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 conflictAction: 'uniquify',
                 saveAs: false
             }).then((res) => {
-                console.log("capture res: ", res);
                 if (res) {
                     chrome.notifications.create({ title: "img2Text", message: "Image is currently being processed. Expect it to be open in a new tab in a hot minute", iconUrl: "/res/icon24.png", type: "basic" })
 
-                    //open url with data image
-
-                    // x("http://127.0.0.1:3000/img2text")
                 }
             })
         }

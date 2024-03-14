@@ -20,6 +20,13 @@ body ul, body li {
   list-style-type: none;
 }
 
+h5#error{
+  font-size: 16px;
+  color: red;
+  display: none;
+  text-align: center;
+}
+
 .noScroll {
   overflow: hidden !important;
 }
