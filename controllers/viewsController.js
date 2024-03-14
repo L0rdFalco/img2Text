@@ -152,22 +152,26 @@ exports.getOrderPage = async (request, response, next) => {
         //get the last element in the generatedManuscripts array and get its boxid
         //query db for the ebook product model and set said info in the order page
         console.log("order type payload 1", request.params);
-        console.log("order type payload 2", request.query);
 
         let packageName = request.params.packageName
 
+        console.log(2);
         const CurrentPackage = await PackagesModel.findOne({ name: packageName })
 
+        console.log(3);
         let paypalUrl = null
 
         if (process.env.NODE_ENV === "production") {
+            console.log("prod");
             paypalUrl = `https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_LIVE_CLIENT_ID}&currency=USD`
 
         }
         else if (process.env.NODE_ENV === "development") {
+            console.log("dev");
             paypalUrl = `https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_SANDBOX_CLIENT_ID}&currency=USD`
         }
 
+        console.log(4);
 
         response.status(200).render("orderpage", {
             data: {
