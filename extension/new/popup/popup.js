@@ -163,7 +163,7 @@ document.addEventListener("click", function (e) {
                     heading: "feature restricted!",
                     message: "Please pay to unlock. I also got bills ;)",
                     btnText: "pay a one time $5!",
-                    link: "http://127.0.0.1:3000/pricing"
+                    link: "https://imagetotext-lper.onrender.com/pricing"
 
 
                 })
@@ -183,11 +183,11 @@ document.addEventListener("click", function (e) {
 
     else if (logintarget) {
         // openTab("https://imagetotext-lper.onrender.com/login")
-        openTab("http://127.0.0.1:3000/login")
+        openTab("https://imagetotext-lper.onrender.com/login")
     }
 
     else if (accStateTarget) {
-        openTab("http://127.0.0.1:3000/pricing")
+        openTab("https://imagetotext-lper.onrender.com/pricing")
 
     }
 

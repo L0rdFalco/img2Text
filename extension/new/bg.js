@@ -5,7 +5,7 @@ let cookieName = null;
 
 async function cookieChecker(cb) {
     // let res = await chrome.cookies.getAll({ url: "https://imagetotext-lper.onrender.com/" })
-    let res = await chrome.cookies.getAll({ url: "http://127.0.0.1:3000/" })
+    let res = await chrome.cookies.getAll({ url: "https://imagetotext-lper.onrender.com/" })
 
     for (let i in res) {
         if (res[i]["name"] === "Auth_Cookie") {
@@ -97,7 +97,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     else if (request.message === "from-popup-account-status") {
         //hit the api here to find out account status (free or paid)
-        xget("http://127.0.0.1:3000/users/account-state", sendResponse)
+        xget("https://imagetotext-lper.onrender.com/users/account-state", sendResponse)
 
     }
 
