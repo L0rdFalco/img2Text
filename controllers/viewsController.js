@@ -159,6 +159,8 @@ exports.getOrderPage = async (request, response, next) => {
         const CurrentPackage = await PackagesModel.findOne({ name: packageName })
 
         console.log(3);
+
+        console.log("node env: ", process.env.NODE_ENV);
         let paypalUrl = null
 
         if (process.env.NODE_ENV === "production") {
