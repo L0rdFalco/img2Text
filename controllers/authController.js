@@ -316,6 +316,7 @@ exports.passportCallback = async function (accessToken, refreshToken, profile, d
         done(null, socialUserDoc)
 
     } catch (error) {
+        console.log(error);
         console.log("passportCallback error");
     }
 
