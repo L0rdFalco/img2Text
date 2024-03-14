@@ -1,0 +1,44 @@
+// random number between two nums inclusive
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+....................................
+//adding content scripts dynamically
+chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
+
+    if (!tab.url
+        || tab.status !== "complete"
+        || !tab.url.startsWith("http")
+
+    ) return;
+
+
+    try {
+
+        await chrome.scripting.insertCSS({
+            target: {
+                tabId: tabId
+            },
+            files: ["./content/content-style.css"]
+        })
+
+        await chrome.scripting.executeScript({
+            target: {
+                tabId: tabId
+            },
+            files: ["./content/content-script.js"]
+        })
+
+
+    } catch (error) {
+        console.log(error);
+    }
+
+
+})
+..............................................
+ console.log("reason --> ", chrome.runtime.OnInstalledReason);
+ console.log("id--> ", chrome.runtime.id);
+

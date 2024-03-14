@@ -179,6 +179,7 @@ exports.getOrderPage = async (request, response, next) => {
         })
 
     } catch (error) {
+        console.log(error);
         response.status(400).render("errorpage", { data: { status: 400, message: "couldn't get order page" } })
     }
 
