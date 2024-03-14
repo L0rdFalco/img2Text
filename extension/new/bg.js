@@ -4,13 +4,15 @@ let cookieName = null;
 
 
 async function cookieChecker(cb) {
-    // let res = await chrome.cookies.getAll({ url: "https://imagetotext-lper.onrender.com/" })
     let res = await chrome.cookies.getAll({ url: "https://imagetotext-lper.onrender.com/" })
 
     for (let i in res) {
         if (res[i]["name"] === "Auth_Cookie") {
             expired = false
             break
+        }
+        else {
+            expired = true
         }
     }
 
@@ -77,10 +79,6 @@ function xget(url, cb) {
                 message: "Server not available. Try again!",
 
             });
-            // chrome.tabs.query({}, function (tabs) {
-            //     tabs.forEach((tab) => {
-            //     });
-            // });
         }
 
     })()
@@ -96,7 +94,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 
     else if (request.message === "from-popup-account-status") {
-        //hit the api here to find out account status (free or paid)
         xget("https://imagetotext-lper.onrender.com/users/account-state", sendResponse)
 
     }
@@ -204,9 +201,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
         }
 
-
     }
-
 
     return true
 

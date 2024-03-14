@@ -30,8 +30,6 @@ function xpost(endpoint, imgUrl) {
 
             extractedTextEl.innerText = res2.message
 
-            //send a message to bg script to clear storage
-
 
         } catch (error) {
             errorMessage("Server not available. Try again!")
@@ -65,8 +63,7 @@ chrome.runtime.sendMessage({ message: "from-newtab-getUrl-cus" }, (res) => {
 })
 
 extractBtn.addEventListener("click", function (e) {
-    //hit api and set text to element
-    //remove the imgUrl from storage
+
 
     extractedTextEl.innerText = "starting text extraction on the image on the right..."
 
@@ -75,8 +72,6 @@ extractBtn.addEventListener("click", function (e) {
     if (imgDataUrl.startsWith("data:image/png;base64")) {
 
         const mText = xpost("https://imagetotext-lper.onrender.com/m/extract-text", imgDataUrl)
-
-
 
 
     }

@@ -12,8 +12,6 @@ function xpost(endpoint, imgUrl) {
             console.log(imgUrl);
             const editedData = imgUrl.replace(/\+/g, "?");
 
-            // console.log(editedData);
-
             const formData = new FormData();
             formData.append("content", editedData);
 
@@ -63,8 +61,7 @@ chrome.runtime.sendMessage({ message: "from-newtab-getUrl-whole" }, (res) => {
 })
 
 extractBtn.addEventListener("click", function (e) {
-    //hit api and set text to element
-    //remove the imgUrl from storage
+
     extractedTextEl.innerText = "starting text extraction on image on the right..."
 
     const imgDataUrl = ssEl.getAttribute("src")

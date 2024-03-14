@@ -118,13 +118,11 @@ document.addEventListener("click", function (e) {
 
 
     if (wp_screenshottarget) {
-        // take screenshot, open in new tab send it as post request for processing
 
         chrome.runtime.sendMessage({ message: "from-popup-wp" }, (res) => {
 
             if (res.message === "screenshot taken") {
-                //rewrite the dom to show appropriate message
-                //post request with image url data
+
 
                 loader(["Processing the screenshot.", "Please be patient"])
 
@@ -133,20 +131,12 @@ document.addEventListener("click", function (e) {
             else {
                 console.log("something went wrong when processing screenshots!");
             }
-            // let image = new Image();
-            // image.src = res.payload;
 
-            // let w = window.open("");
-            // w.document.write(image.outerHTML);
         })
 
 
     }
     else if (custom_screenshottarget) {
-        /**
- * check if is premium user if not, show modal
- * if free user, if no_thanks is clicked then show button
- */
 
         chrome.runtime.sendMessage({ message: "from-popup-account-status" }, (res) => {
             if (res.payload === "CO>(ZPF5tgU?1wJ") {
@@ -182,7 +172,6 @@ document.addEventListener("click", function (e) {
     }
 
     else if (logintarget) {
-        // openTab("https://imagetotext-lper.onrender.com/login")
         openTab("https://imagetotext-lper.onrender.com/login")
     }
 
@@ -196,7 +185,6 @@ document.addEventListener("click", function (e) {
 
 
 chrome.runtime.onMessage.addListener((request) => {
-    console.log("sent req ", request);
 
     if (request.source === "xget") {
         errorMessage(request.message)
