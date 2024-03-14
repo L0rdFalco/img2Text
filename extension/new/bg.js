@@ -113,6 +113,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                         chrome.notifications.create({ title: "img2Text", message: "Image is currently being processed. Expect it to be open in a new tab in a hot minute", iconUrl: "/res/icon24.png", type: "basic" })
 
                         openTab("/web/full/res.html", { page: "whole" })
+
                     }
                 })
 

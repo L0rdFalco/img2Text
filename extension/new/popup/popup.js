@@ -38,12 +38,12 @@ function openTab(url) {
         //logged in so render the generate button
 
         btnDivCont.innerHTML = `
-            <p>take a whole page screenhot</p>
+            <p>take a whole page screenshot</p>
             <button id="wp_screenshot">capture page</button>            
             
             <br>
 
-            <p>take a custom screenhot</p>
+            <p>take a custom screenshot</p>
             <button id="cus_screenshot">capture part</button>
             `
         mainCont.remove()
@@ -52,13 +52,14 @@ function openTab(url) {
     else if (!res.status) {
         //not logged in so render the login button
         mainCont.innerHTML = `
+            <p>to start extracting text from images:</p>
             <p>1. click the login button below</p>
-            <p>2. after login into the website</p>
+            <p>2. after logging into the website,</p>
             <p>3. open this extension popup again</p>
+            <p>4. refresh page if necessary</p>
             <button id="login">login</button>
             
             `
-
         btnDivCont.remove()
 
     }
@@ -112,6 +113,7 @@ document.addEventListener("click", function (e) {
     const custom_screenshottarget = e.target.closest("#cus_screenshot");// custom ss
     const notarget = e.target.closest("#no");
     const logintarget = e.target.closest("#login");
+    const accStateTarget = e.target.closest("#accountState");
 
 
     if (wp_screenshottarget) {
@@ -185,6 +187,11 @@ document.addEventListener("click", function (e) {
     else if (logintarget) {
         // openTab("https://imagetotext-lper.onrender.com/login")
         openTab("http://127.0.0.1:3000/login")
+    }
+
+    else if (accStateTarget) {
+        openTab("http://127.0.0.1:3000/pricing")
+
     }
 
 

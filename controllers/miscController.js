@@ -20,7 +20,7 @@ exports.extractText = (request, response, next) => {
             const worker = await tes.createWorker('eng');
             const ret = await worker.recognize(fData);
             const extractedText = ret.data.text
-            console.log(extractedText);
+            // console.log(extractedText);
             await worker.terminate();
 
 
