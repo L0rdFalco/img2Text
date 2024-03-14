@@ -151,7 +151,8 @@ exports.getOrderPage = async (request, response, next) => {
 
         //get the last element in the generatedManuscripts array and get its boxid
         //query db for the ebook product model and set said info in the order page
-        console.log("order type payload", request.params);
+        console.log("order type payload 1", request.params);
+        console.log("order type payload 2", request.query);
 
         let packageName = request.params.packageName
 
