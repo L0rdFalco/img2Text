@@ -22,22 +22,27 @@ async function mongoConnection() {
 
 
 async function nodeServerInit() {
-    let res = null
-
-
     while (true) {
-        res = await mongoConnection()
 
-        if (true) {
+        try {
+
+            await mongoose.connect(process.env.MONGO_CONN_STR)
+
             app.listen(port, () => {
-                console.log(`text from image app listening on port ${port}`);
-            })
+                console.log(`pzbkcr db listening on port ${port}`);
 
-            break
+
+            });
+            break;
+
+        } catch (error) {
+            console.log("pzbkcr db connection error");
+
+
         }
 
-    }
 
+    }
 
 
 }

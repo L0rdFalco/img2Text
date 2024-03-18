@@ -1,6 +1,5 @@
 let accountState = true
 let expired = true;
-let cookieName = null;
 
 
 async function cookieChecker(cb) {
