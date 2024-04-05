@@ -39,7 +39,7 @@ function openTab(url) {
         //logged in so render the generate button
 
         btnDivCont.innerHTML = `
-            <p>take a whole page screenshot</p>
+            <p>screenshot visible page</p>
             <button id="wp_screenshot">capture page</button>            
             
             <br>

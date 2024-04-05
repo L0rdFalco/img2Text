@@ -68,7 +68,7 @@ extractBtn.addEventListener("click", function (e) {
 
     if (imgDataUrl.startsWith("data:image/png;base64")) {
 
-        xpost("https://imagetotext-lper.onrender.com/m/extract-text", imgDataUrl)
+        xpost("https://textfromvideoai.onrender.com/m/extract-text", imgDataUrl)
 
 
     }

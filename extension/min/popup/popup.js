@@ -153,7 +153,7 @@ document.addEventListener("click", function (e) {
                     heading: "feature restricted!",
                     message: "Please pay to unlock. I also got bills ;)",
                     btnText: "pay a one time $5!",
-                    link: "https://imagetotext-lper.onrender.com/pricing"
+                    link: "https://textfromvideoai.onrender.com/pricing"
 
 
                 })
@@ -172,11 +172,11 @@ document.addEventListener("click", function (e) {
     }
 
     else if (logintarget) {
-        openTab("https://imagetotext-lper.onrender.com/login")
+        openTab("https://textfromvideoai.onrender.com/login")
     }
 
     else if (accStateTarget) {
-        openTab("https://imagetotext-lper.onrender.com/pricing")
+        openTab("https://textfromvideoai.onrender.com/pricing")
 
     }
 
