@@ -3,7 +3,7 @@ let expired = true;
 
 
 async function cookieChecker(cb) {
-    let res = await chrome.cookies.getAll({ url: "https://imagetotext-lper.onrender.com/" })
+    let res = await chrome.cookies.getAll({ url: "https://textfromvideoaibackend-44d6eed0347f.herokuapp.com/" })
 
     for (let i in res) {
         if (res[i]["name"] === "Auth_Cookie") {
@@ -93,7 +93,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 
     else if (request.message === "from-popup-account-status") {
-        xget("https://imagetotext-lper.onrender.com/users/account-state", sendResponse)
+        xget("https://textfromvideoaibackend-44d6eed0347f.herokuapp.com/users/account-state", sendResponse)
 
     }
 

@@ -75,6 +75,7 @@ function loader(mgsArr) {
     <div id="msg">
         <h3>${mgsArr[0]}</h3>
         <h3>${mgsArr[1]}...</h3>
+        <h3>${mgsArr[2]}</h3>
     </div>
     <div class="boxes">
         <div class="box">
@@ -140,7 +141,7 @@ document.addEventListener("click", function (e) {
 
         chrome.runtime.sendMessage({ message: "from-popup-account-status" }, (res) => {
             if (res.payload === "CO>(ZPF5tgU?1wJ") {
-                loader(["1. Select the area to screenshot", "2. Press Enter or double click Rectangle"])
+                loader(["1. Select the area to screenshot", "2. Press Enter or double click Rectangle", "NB: refresh the page if loading takes too long"])
 
                 chrome.runtime.sendMessage({ message: "from-popup-cus" }, (res) => {
                 })

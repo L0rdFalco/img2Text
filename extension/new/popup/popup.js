@@ -39,7 +39,7 @@ function openTab(url) {
         //logged in so render the generate button
 
         btnDivCont.innerHTML = `
-            <p>screenshot visible page</p>
+            <p>take a whole page screenshot</p>
             <button id="wp_screenshot">capture page</button>            
             
             <br>
@@ -75,6 +75,7 @@ function loader(mgsArr) {
     <div id="msg">
         <h3>${mgsArr[0]}</h3>
         <h3>${mgsArr[1]}...</h3>
+        <h3>${mgsArr[2]}</h3>
     </div>
     <div class="boxes">
         <div class="box">
@@ -140,7 +141,7 @@ document.addEventListener("click", function (e) {
 
         chrome.runtime.sendMessage({ message: "from-popup-account-status" }, (res) => {
             if (res.payload === "CO>(ZPF5tgU?1wJ") {
-                loader(["1. Select the area to screenshot", "2. Press Enter or double click Rectangle"])
+                loader(["1. Select the area to screenshot", "2. Press Enter or double click Rectangle", "NB: refresh the page if loading takes too long"])
 
                 chrome.runtime.sendMessage({ message: "from-popup-cus" }, (res) => {
                 })
@@ -153,7 +154,7 @@ document.addEventListener("click", function (e) {
                     heading: "feature restricted!",
                     message: "Please pay to unlock. I also got bills ;)",
                     btnText: "pay a one time $5!",
-                    link: "https://imagetotext-lper.onrender.com/pricing"
+                    link: "https://textfromvideoaibackend-44d6eed0347f.herokuapp.com/pricing"
 
 
                 })
@@ -172,11 +173,11 @@ document.addEventListener("click", function (e) {
     }
 
     else if (logintarget) {
-        openTab("https://imagetotext-lper.onrender.com/login")
+        openTab("https://textfromvideoaibackend-44d6eed0347f.herokuapp.com/login")
     }
 
     else if (accStateTarget) {
-        openTab("https://imagetotext-lper.onrender.com/pricing")
+        openTab("https://textfromvideoaibackend-44d6eed0347f.herokuapp.com/pricing")
 
     }
 
