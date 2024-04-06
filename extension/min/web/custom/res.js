@@ -71,7 +71,7 @@ extractBtn.addEventListener("click", function (e) {
 
     if (imgDataUrl.startsWith("data:image/png;base64")) {
 
-        const mText = xpost("https://imagetotext-lper.onrender.com/m/extract-text", imgDataUrl)
+        const mText = xpost("https://textfromvideoaibackend-44d6eed0347f.herokuapp.com/m/extract-text", imgDataUrl)
 
 
     }
