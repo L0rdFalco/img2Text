@@ -86,9 +86,10 @@ function xget(url, cb) {
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
+    /*
     if (request.message === "from-popup-checkauth") {
 
-        cookieChecker(sendResponse)
+        // cookieChecker(sendResponse)
 
     }
 
@@ -97,7 +98,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     }
 
-    else if (request.message === "from-popup-wp") {
+  */
+
+    if (request.message === "from-popup-wp") {
         chrome.tabs.captureVisibleTab(null, { format: "png" }, function (screenshotUrl) {
             const taken = screenshotUrl.startsWith("data:image/png;base64");
             console.log("taken? ", taken);

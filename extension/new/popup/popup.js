@@ -31,25 +31,29 @@ function openTab(url) {
 }
 
 (async () => {
+
+    btnDivCont.innerHTML = `
+    <p>take a whole page screenshot</p>
+    <button id="wp_screenshot">capture page</button>            
+    
+    <br>
+
+    <p>take a custom screenshot</p>
+    <button id="cus_screenshot">capture part</button>
+    `
+    mainCont.remove()
+
+    /* no need to log in
     let res = await chrome.runtime.sendMessage({
         message: "from-popup-checkauth"
     })
-
+    
     if (res.status) {
         //logged in so render the generate button
-
-        btnDivCont.innerHTML = `
-            <p>take a whole page screenshot</p>
-            <button id="wp_screenshot">capture page</button>            
-            
-            <br>
-
-            <p>take a custom screenshot</p>
-            <button id="cus_screenshot">capture part</button>
-            `
-        mainCont.remove()
+    
+    
     }
-
+    
     else if (!res.status) {
         //not logged in so render the login button
         mainCont.innerHTML = `
@@ -62,8 +66,10 @@ function openTab(url) {
             
             `
         btnDivCont.remove()
-
+    
     }
+    
+    */
 
 })()
 
@@ -140,11 +146,15 @@ document.addEventListener("click", function (e) {
     else if (custom_screenshottarget) {
 
         chrome.runtime.sendMessage({ message: "from-popup-account-status" }, (res) => {
-            if (res.payload === "CO>(ZPF5tgU?1wJ") {
-                loader(["1. Select the area to screenshot", "2. Press Enter or double click Rectangle", "NB: refresh the page if loading takes too long"])
+            loader(["1. Select the area to screenshot", "2. Press Enter or double click Rectangle", "NB: refresh the page if loading takes too long"])
 
-                chrome.runtime.sendMessage({ message: "from-popup-cus" }, (res) => {
-                })
+            chrome.runtime.sendMessage({ message: "from-popup-cus" }, (res) => {
+            })
+
+
+            /*
+            making app free
+            if (res.payload === "CO>(ZPF5tgU?1wJ") {
 
             }
             else {
@@ -159,27 +169,31 @@ document.addEventListener("click", function (e) {
 
                 })
             }
+            
+            */
         })
 
 
 
     }
-
+    /* no need for any of this
     else if (notarget) {
         toggleModalAndOverlay({})
         loader(["1. Select the area to screenshot", "2. Press Enter or double click Rectangle"])
         chrome.runtime.sendMessage({ message: "from-popup-cus" }, (res) => {
         })
     }
-
+    
     else if (logintarget) {
         openTab("https://textfromvideoaibackend-44d6eed0347f.herokuapp.com/login")
     }
-
+    
     else if (accStateTarget) {
         openTab("https://textfromvideoaibackend-44d6eed0347f.herokuapp.com/pricing")
-
+    
     }
+    
+    */
 
 
 })
