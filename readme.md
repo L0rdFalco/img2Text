@@ -1,5 +1,4 @@
-automate creation of multiple image designs for print on demand  
-
+## CHROME EXTENSION THAT USES TESSERACT TO READ TEXT FROM IMAGES
 things to change for other SaaS apps:  
 
 for initial setup:  
